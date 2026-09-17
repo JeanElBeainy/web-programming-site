@@ -1,132 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internet History</title>
-</head>
-<body>
-    <header>
-        <h1>Internet History</h1>
-        <nav>
-            <a href="tcpip">TCP/IP</a>
-            <a href="dns">DNS</a>
-            <a href="www">World Wide Web</a>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <article>
-                <h3>
-                    Introduction: the History of the Internet
-                </h3>
-                <p>
-                    The internet is a large system of connected computer networks around the world and
-                    owned by different people, which allows them to share data to each others. It all
-                    began in October 1969 as ARPANET which is a project funded by the US department
-                    of Defense. It was the first network that worked at the time by breaking the data
-                    into small chunks and sending it. Afterwards, we see multiple milestones achieved
-                    from this very first step to the internet world, such as sending the first email
-                    in 1971, ethernet invention in 1973, and so on. We will take a look at three key
-                    technologies which are TCP/IP in 1983, DNS in 1983-1984, and the World Wide Web
-                    (www) / HTTP and HTML from 1989 till 1991.
-                </p>
-            </article>
-        </section>
-        <section id="tcpip">
-            <article>
-                <h3>
-                    1. TCP/IP: The "Flag Day" protocol transition
-                </h3>
-                <p>
-                    Event: On January 1, 1983, every host on ARPANET was required to switch from the older Network Control Protocol (NCP) to TCP/IP, developed by Vinton Cerf and Robert Kahn. TCP/IP split communication into a reliable transmission layer and a simpler routing layer, allowing data to move between dissimilar, independently operated networks.
-                </p>
-                <p>
-                    Why it mattered: This gave the internet its defining architecture — a "network of networks" that lets any TCP/IP-compliant system exchange data with any other, regardless of the underlying hardware. It remains the core protocol suite of the internet today.
-                </p>
-                <p>
-                    Sources:
-                </p>
-                <ul>
-                    <li>
-                        <a href="https://www.icann.org/en/blogs/details/the-first-message-transmission-29-10-2019-en">
-                            V. Cerf, "The First Message Transmission," ICANN Blog, Oct. 29, 2019.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.tribuneindia.com/news/anniversary/birth-of-the-internet-a-historic-development-in-communications">
-                            "Birth of the Internet: A Historic Development in Communications," The Tribune.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://elists.isoc.org/pipermail/internet-history/2023-August/008773.html">
-                            Internet History Mailing List, "Memories of Flag Day?," Internet Society Archives, Aug. 2023.
-                        </a>
-                    </li>
-                </ul>
-            </article>
-        </section>
-        <section id="dns">
-            <article>
-                <h3>
-                    2. DNS: Introduction of a Distributed Naming Architecture
-                </h3>
-                <p>
-                    Event: Paul Mockapetris, at USC's Information Sciences Institute, published RFC 882
-                    and RFC 883 in 1983, proposing a hierarchical, distributed system to replace the
-                    single manually-maintained hosts.txt file used to map computer names to numeric
-                    addresses. He built the first working name server, "Jeeves," in 1983–84; the system
-                    was formally standardized in RFCs 1034 and 1035 in 1987.
-                </p>
-                <p>
-                    Why it mattered: DNS let people use memorable names instead of numeric IP addresses
-                    and distributed the job of managing those names across many servers instead of one
-                    central authority — a design that scaled with the internet's growth and remains
-                    its core naming infrastructure.
-                </p>
-                <p>
-                    Sources:
-                </p>
-                <ul>
-                    <li>
-                        <a href="https://awards.acm.org/award-recipients/mockapetris_3342151">
-                            Association for Computing Machinery, "Paul Mockapetris — ACM Software System Award Citation," ACM Awards, 2019.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://bind9.readthedocs.io/en/latest/history.html">
-                            Internet Systems Consortium, "A Brief History of the DNS and BIND," ISC Documentation.
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://www.dnib.com/timeline/data-domain-names-timeline">
-                            "Data & Domain Names Timeline," DNIB.com — Domain Name Industry Brief.
-                        </a>
-                    </li>
-                </ul>
-            </article>
-        </section>
-        <section id="www">
-            <article>
-                <h3>
-                    3. World Wide Web: Invention of the Web at CERN
-                </h3>
-                <p>
-                    Event: Tim Berners-Lee, a researcher at CERN, proposed a hypertext-based system
-                    for linking documents across computers in March 1989. By late 1990, with Robert
-                    Cailliau, he had built HTML, URLs, and HTTP, along with the first browser/editor
-                    and web server. The first website went live on August 6, 1991, and CERN released
-                    the software into the public domain in 1993.
-                </p>
-                <p>
-                    Why it mattered: The web is the application layer that made the internet browsable
-                    and usable by non-specialists rather than a tool limited to technical users, and
-                    CERN's royalty-free release was central to its rapid, unrestricted global adoption.
-                </p>
-                <p>
+{% extends "base-history.html" %}
+{% set page_title = "Internet History" %}
+
+{% block nav %}
+<nav>
+    <a href="#tcpip">TCP/IP</a>
+    <a href="#dns">DNS</a>
+    <a href="#www">World Wide Web</a>
+</nav>
+{% endblock %}
+
+{% block content %}
+<main>
+    <section>
+        <article>
+            <h3>
+                Introduction: the History of the Internet
+            </h3>
+            <p>
+                The internet is a large system of connected computer networks around the world and
+                owned by different people, which allows them to share data to each others. It all
+                began in October 1969 as ARPANET which is a project funded by the US department
+                of Defense. It was the first network that worked at the time by breaking the data
+                into small chunks and sending it. Afterwards, we see multiple milestones achieved
+                from this very first step to the internet world, such as sending the first email
+                in 1971, ethernet invention in 1973, and so on. We will take a look at three key
+                technologies which are TCP/IP in 1983, DNS in 1983-1984, and the World Wide Web
+                (www) / HTTP and HTML from 1989 till 1991.
+            </p>
+        </article>
+    </section>
+    <section id="tcpip">
+        <article>
+            <h3>
+                1. TCP/IP: The "Flag Day" protocol transition
+            </h3>
+            <p>
+                Event: On January 1, 1983, every host on ARPANET was required to switch from the older Network Control Protocol (NCP) to TCP/IP, developed by Vinton Cerf and Robert Kahn. TCP/IP split communication into a reliable transmission layer and a simpler routing layer, allowing data to move between dissimilar, independently operated networks.
+            </p>
+            <p>
+                Why it mattered: This gave the internet its defining architecture — a "network of networks" that lets any TCP/IP-compliant system exchange data with any other, regardless of the underlying hardware. It remains the core protocol suite of the internet today.
+            </p>
+            <p>
                 Sources:
-                </p>
-                <ul>
+            </p>
+            <ul>
+                <li>
+                    <a href="https://www.icann.org/en/blogs/details/the-first-message-transmission-29-10-2019-en">
+                        V. Cerf, "The First Message Transmission," ICANN Blog, Oct. 29, 2019.
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.tribuneindia.com/news/anniversary/birth-of-the-internet-a-historic-development-in-communications">
+                        "Birth of the Internet: A Historic Development in Communications," The Tribune.
+                    </a>
+                </li>
+                <li>
+                    <a href="https://elists.isoc.org/pipermail/internet-history/2023-August/008773.html">
+                        Internet History Mailing List, "Memories of Flag Day?," Internet Society Archives, Aug. 2023.
+                    </a>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="dns">
+        <article>
+            <h3>
+                2. DNS: Introduction of a Distributed Naming Architecture
+            </h3>
+            <p>
+                Event: Paul Mockapetris, at USC's Information Sciences Institute, published RFC 882
+                and RFC 883 in 1983, proposing a hierarchical, distributed system to replace the
+                single manually-maintained hosts.txt file used to map computer names to numeric
+                addresses. He built the first working name server, "Jeeves," in 1983–84; the system
+                was formally standardized in RFCs 1034 and 1035 in 1987.
+            </p>
+            <p>
+                Why it mattered: DNS let people use memorable names instead of numeric IP addresses
+                and distributed the job of managing those names across many servers instead of one
+                central authority — a design that scaled with the internet's growth and remains
+                its core naming infrastructure.
+            </p>
+            <p>
+                Sources:
+            </p>
+            <ul>
+                <li>
+                    <a href="https://awards.acm.org/award-recipients/mockapetris_3342151">
+                        Association for Computing Machinery, "Paul Mockapetris — ACM Software System Award Citation," ACM Awards, 2019.
+                    </a>
+                </li>
+                <li>
+                    <a href="https://bind9.readthedocs.io/en/latest/history.html">
+                        Internet Systems Consortium, "A Brief History of the DNS and BIND," ISC Documentation.
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.dnib.com/timeline/data-domain-names-timeline">
+                        "Data & Domain Names Timeline," DNIB.com — Domain Name Industry Brief.
+                    </a>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="www">
+        <article>
+            <h3>
+                3. World Wide Web: Invention of the Web at CERN
+            </h3>
+            <p>
+                Event: Tim Berners-Lee, a researcher at CERN, proposed a hypertext-based system
+                for linking documents across computers in March 1989. By late 1990, with Robert
+                Cailliau, he had built HTML, URLs, and HTTP, along with the first browser/editor
+                and web server. The first website went live on August 6, 1991, and CERN released
+                the software into the public domain in 1993.
+            </p>
+            <p>
+                Why it mattered: The web is the application layer that made the internet browsable
+                and usable by non-specialists rather than a tool limited to technical users, and
+                CERN's royalty-free release was central to its rapid, unrestricted global adoption.
+            </p>
+            <p>
+                Sources:
+            </p>
+            <ul>
                 <li>
                     <a href="https://home.cern/?p=7954">
                         CERN, "Web@30: The 30-Year Anniversary of an Invention That Changed the World," CERN News, Mar. 4, 2019.
@@ -142,17 +138,8 @@
                         The National Museum of Computing, "Tim Berners-Lee," Computing History.
                     </a>
                 </li>
-                </ul>
-            </article>
-        </section>
-    </main>
-    <footer>
-        <p>Web Programming — built with Flask and deployed on Render.</p>
-        <p>
-            This website is created for educational purposes
-            only, as part of the GIN446 - Web Programming course,
-            School of Engineering, USEK. (Fall 2026-2027)
-        </p>
-    </footer>
-</body>
-</html>
+            </ul>
+        </article>
+    </section>
+</main>
+{% endblock %}

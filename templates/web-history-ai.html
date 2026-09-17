@@ -1,147 +1,136 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>The History of the Web</title>
-	<meta name="description" content="The history of the World Wide Web and three key web technologies: the invention at CERN (1989-1991), the Mosaic browser (1993), and the founding of Google (1998).">
-</head>
-<body>
+{% extends "base-history.html" %}
+{% set page_title = "The History of the Web" %}
 
-	<header>
-		<h1>The History of the Web</h1>
-		<nav aria-label="On this page">
-			<h2>Contents</h2>
-			<ul>
-				<li><a href="#introduction">Introduction</a></li>
-				<li><a href="#key-technologies">Key Technologies of the Web</a>
-					<ul>
-						<li><a href="#www">1. World Wide Web &mdash; Invention at CERN</a></li>
-						<li><a href="#mosaic">2. Mosaic &mdash; The First Popular Web Browser</a></li>
-						<li><a href="#google">3. Google &mdash; Organizing the Web at Scale</a></li>
-					</ul>
-				</li>
-				<li><a href="internet-history-ai.html">Companion page: The History of the Internet</a></li>
-			</ul>
-		</nav>
-	</header>
+{% block head %}
+    <meta name="description" content="The history of the World Wide Web and three key web technologies: the invention at CERN (1989-1991), the Mosaic browser (1993), and the founding of Google (1998).">
+{% endblock %}
 
-	<main>
+{% block nav %}
+<nav aria-label="On this page">
+    <h2>Contents</h2>
+    <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#key-technologies">Key Technologies of the Web</a>
+            <ul>
+                <li><a href="#www">1. World Wide Web &mdash; Invention at CERN</a></li>
+                <li><a href="#mosaic">2. Mosaic &mdash; The First Popular Web Browser</a></li>
+                <li><a href="#google">3. Google &mdash; Organizing the Web at Scale</a></li>
+            </ul>
+        </li>
+        <li><a href="{{ url_for('internet_history_ai') }}">Companion page: The History of the Internet</a></li>
+    </ul>
+</nav>
+{% endblock %}
 
-		<section id="introduction">
-			<h2>Introduction</h2>
-			<p>The World Wide Web, or simply called the Web, is a system of documents that are linked together and can be accessed through the internet. It is not similar to the internet; the internet carries the data of the web which we find and share information on.</p>
-			<p>It all began between 1989 and 1991 when Tim Berners-Lee proposed a way for scientists to link their documents together in different computers without the need to exchange them manually. For this to be achievable, he created HTML to format the pages and HTTP to transfer them.</p>
-			<p>From this point, it started to expand and have seen multiple milestones such as the release of Mosaic browser in 1993 which made the web easy to access, and the founding of Google in 1998.</p>
-		</section>
+{% block content %}
+<main>
 
-		<section id="key-technologies">
-			<h2>Key Technologies of the Web</h2>
+    <section id="introduction">
+        <h2>Introduction</h2>
+        <p>The World Wide Web, or simply called the Web, is a system of documents that are linked together and can be accessed through the internet. It is not similar to the internet; the internet carries the data of the web which we find and share information on.</p>
+        <p>It all began between 1989 and 1991 when Tim Berners-Lee proposed a way for scientists to link their documents together in different computers without the need to exchange them manually. For this to be achievable, he created HTML to format the pages and HTTP to transfer them.</p>
+        <p>From this point, it started to expand and have seen multiple milestones such as the release of Mosaic browser in 1993 which made the web easy to access, and the founding of Google in 1998.</p>
+    </section>
 
-			<h3>Timeline at a glance</h3>
-			<table>
-				<caption>Three key technologies in the history of the web</caption>
-				<thead>
-					<tr>
-						<th scope="col">Technology</th>
-						<th scope="col">Milestone</th>
-						<th scope="col">Year</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th scope="row">World Wide Web (CERN)</th>
-						<td>Creation of HTML, HTTP, and the URL</td>
-						<td><time datetime="1989">1989</time>&ndash;<time datetime="1991">1991</time></td>
-					</tr>
-					<tr>
-						<th scope="row">Mosaic</th>
-						<td>Public release of NCSA Mosaic</td>
-						<td><time datetime="1993">1993</time></td>
-					</tr>
-					<tr>
-						<th scope="row">Google</th>
-						<td>Founding of Google Inc.</td>
-						<td><time datetime="1998">1998</time></td>
-					</tr>
-				</tbody>
-			</table>
+    <section id="key-technologies">
+        <h2>Key Technologies of the Web</h2>
 
-			<article id="www">
-				<h3>1. World Wide Web &mdash; Invention at CERN</h3>
-				<p><strong>Milestone:</strong> Creation of HTML, HTTP, and the URL</p>
-				<p><strong>Year:</strong> <time datetime="1989">1989</time>&ndash;<time datetime="1991">1991</time></p>
+        <h3>Timeline at a glance</h3>
+        <table>
+            <caption>Three key technologies in the history of the web</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Technology</th>
+                    <th scope="col">Milestone</th>
+                    <th scope="col">Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">World Wide Web (CERN)</th>
+                    <td>Creation of HTML, HTTP, and the URL</td>
+                    <td><time datetime="1989">1989</time>&ndash;<time datetime="1991">1991</time></td>
+                </tr>
+                <tr>
+                    <th scope="row">Mosaic</th>
+                    <td>Public release of NCSA Mosaic</td>
+                    <td><time datetime="1993">1993</time></td>
+                </tr>
+                <tr>
+                    <th scope="row">Google</th>
+                    <td>Founding of Google Inc.</td>
+                    <td><time datetime="1998">1998</time></td>
+                </tr>
+            </tbody>
+        </table>
 
-				<h4>Event</h4>
-				<p>Tim Berners-Lee, a researcher at CERN, proposed a hypertext-based system for linking documents in March <time datetime="1989-03">1989</time>. By late 1990, with Robert Cailliau, he had built HTML, URLs, and HTTP, plus the first browser/editor and web server. The first website went live on <time datetime="1991-08-06">August 6, 1991</time>.</p>
+        <article id="www">
+            <h3>1. World Wide Web &mdash; Invention at CERN</h3>
+            <p><strong>Milestone:</strong> Creation of HTML, HTTP, and the URL</p>
+            <p><strong>Year:</strong> <time datetime="1989">1989</time>&ndash;<time datetime="1991">1991</time></p>
 
-				<h4>Why it mattered</h4>
-				<p>The web is the application layer that made the internet browsable and usable by non-specialists, turning a network for technical users into a system of interlinked, navigable documents.</p>
+            <h4>Event</h4>
+            <p>Tim Berners-Lee, a researcher at CERN, proposed a hypertext-based system for linking documents in March <time datetime="1989-03">1989</time>. By late 1990, with Robert Cailliau, he had built HTML, URLs, and HTTP, plus the first browser/editor and web server. The first website went live on <time datetime="1991-08-06">August 6, 1991</time>.</p>
 
-				<h4>Sources</h4>
-				<ol start="1">
-					<li id="ref1">CERN, &ldquo;Web@30: The 30-Year Anniversary of an Invention That Changed the World,&rdquo; <cite>CERN News</cite>, Mar. 4, 2019. [Online]. Available: <a href="https://home.cern/?p=7954">https://home.cern/?p=7954</a>. [Accessed: Sep. 13, 2026].</li>
-					<li id="ref2">Massachusetts Institute of Technology, Lemelson Foundation, &ldquo;Tim Berners-Lee,&rdquo; <cite>MIT Lemelson</cite>. [Online]. Available: <a href="https://lemelson.mit.edu/resources/tim-berners">https://lemelson.mit.edu/resources/tim-berners</a>. [Accessed: Sep. 13, 2026].</li>
-					<li id="ref3">The National Museum of Computing, &ldquo;Tim Berners-Lee,&rdquo; <cite>Computing History</cite>. [Online]. Available: <a href="https://computinghistory.org.uk/det/2489/Tim-Berners-Lee">https://computinghistory.org.uk/det/2489/Tim-Berners-Lee</a>. [Accessed: Sep. 13, 2026].</li>
-				</ol>
-			</article>
+            <h4>Why it mattered</h4>
+            <p>The web is the application layer that made the internet browsable and usable by non-specialists, turning a network for technical users into a system of interlinked, navigable documents.</p>
 
-			<article id="mosaic">
-				<h3>2. Mosaic &mdash; The First Popular Web Browser</h3>
-				<p><strong>Milestone:</strong> Public release of NCSA Mosaic</p>
-				<p><strong>Year:</strong> <time datetime="1993">1993</time></p>
+            <h4>Sources</h4>
+            <ol start="1">
+                <li id="ref1">CERN, &ldquo;Web@30: The 30-Year Anniversary of an Invention That Changed the World,&rdquo; <cite>CERN News</cite>, Mar. 4, 2019. [Online]. Available: <a href="https://home.cern/?p=7954">https://home.cern/?p=7954</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref2">Massachusetts Institute of Technology, Lemelson Foundation, &ldquo;Tim Berners-Lee,&rdquo; <cite>MIT Lemelson</cite>. [Online]. Available: <a href="https://lemelson.mit.edu/resources/tim-berners">https://lemelson.mit.edu/resources/tim-berners</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref3">The National Museum of Computing, &ldquo;Tim Berners-Lee,&rdquo; <cite>Computing History</cite>. [Online]. Available: <a href="https://computinghistory.org.uk/det/2489/Tim-Berners-Lee">https://computinghistory.org.uk/det/2489/Tim-Berners-Lee</a>. [Accessed: Sep. 13, 2026].</li>
+            </ol>
+        </article>
 
-				<h4>Event</h4>
-				<p>Released <time datetime="1993-01-23">January 23, 1993</time>, by Marc Andreessen and Eric Bina at the University of Illinois&rsquo;s National Center for Supercomputing Applications (NCSA), Mosaic was the first browser to display images inline with text and was distributed free, with versions for Windows, Macintosh, and Unix.</p>
+        <article id="mosaic">
+            <h3>2. Mosaic &mdash; The First Popular Web Browser</h3>
+            <p><strong>Milestone:</strong> Public release of NCSA Mosaic</p>
+            <p><strong>Year:</strong> <time datetime="1993">1993</time></p>
 
-				<h4>Why it mattered</h4>
-				<p>Mosaic&rsquo;s ease of use is widely credited with turning the web from an academic tool into something ordinary people could use, setting the visual and navigational template for every browser that followed.</p>
+            <h4>Event</h4>
+            <p>Released <time datetime="1993-01-23">January 23, 1993</time>, by Marc Andreessen and Eric Bina at the University of Illinois&rsquo;s National Center for Supercomputing Applications (NCSA), Mosaic was the first browser to display images inline with text and was distributed free, with versions for Windows, Macintosh, and Unix.</p>
 
-				<h4>Sources</h4>
-				<ol start="4">
-					<li id="ref4">&ldquo;Mosaic &mdash; The First Global Web Browser,&rdquo; <cite>Living Internet</cite>. [Online]. Available: <a href="https://livinginternet.info/w/wi_mosaic.htm">https://livinginternet.info/w/wi_mosaic.htm</a>. [Accessed: Sep. 13, 2026].</li>
-					<li id="ref5">&ldquo;NCSA Mosaic, the First Real Web Browser, Turns 20,&rdquo; <cite>Fox News</cite>. [Online]. Available: <a href="https://www.foxnews.com/tech/ncsa-mosaic-the-first-real-web-browser-turns-20.amp">https://www.foxnews.com/tech/ncsa-mosaic-the-first-real-web-browser-turns-20.amp</a>. [Accessed: Sep. 13, 2026].</li>
-					<li id="ref6">M. Andreessen, &ldquo;NCSA Mosaic Technical Summary,&rdquo; <cite>Electronic Frontier Foundation Exhibit K</cite>, Feb. 20, 1993. [Online]. Available: <a href="https://w2.eff.org/patent/wanted/neomedia/reexam/ExhibitK_MosaicWebBrowserHistory_NCSA.pdf">https://w2.eff.org/patent/wanted/neomedia/reexam/ExhibitK_MosaicWebBrowserHistory_NCSA.pdf</a>. [Accessed: Sep. 13, 2026].</li>
-				</ol>
-			</article>
+            <h4>Why it mattered</h4>
+            <p>Mosaic&rsquo;s ease of use is widely credited with turning the web from an academic tool into something ordinary people could use, setting the visual and navigational template for every browser that followed.</p>
 
-			<article id="google">
-				<h3>3. Google &mdash; Organizing the Web at Scale</h3>
-				<p><strong>Milestone:</strong> Founding of Google Inc.</p>
-				<p><strong>Year:</strong> <time datetime="1998">1998</time></p>
+            <h4>Sources</h4>
+            <ol start="4">
+                <li id="ref4">&ldquo;Mosaic &mdash; The First Global Web Browser,&rdquo; <cite>Living Internet</cite>. [Online]. Available: <a href="https://livinginternet.info/w/wi_mosaic.htm">https://livinginternet.info/w/wi_mosaic.htm</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref5">&ldquo;NCSA Mosaic, the First Real Web Browser, Turns 20,&rdquo; <cite>Fox News</cite>. [Online]. Available: <a href="https://www.foxnews.com/tech/ncsa-mosaic-the-first-real-web-browser-turns-20.amp">https://www.foxnews.com/tech/ncsa-mosaic-the-first-real-web-browser-turns-20.amp</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref6">M. Andreessen, &ldquo;NCSA Mosaic Technical Summary,&rdquo; <cite>Electronic Frontier Foundation Exhibit K</cite>, Feb. 20, 1993. [Online]. Available: <a href="https://w2.eff.org/patent/wanted/neomedia/reexam/ExhibitK_MosaicWebBrowserHistory_NCSA.pdf">https://w2.eff.org/patent/wanted/neomedia/reexam/ExhibitK_MosaicWebBrowserHistory_NCSA.pdf</a>. [Accessed: Sep. 13, 2026].</li>
+            </ol>
+        </article>
 
-				<h4>Event</h4>
-				<p>Larry Page and Sergey Brin, Stanford PhD students, developed a search engine (&ldquo;BackRub&rdquo;) that ranked pages by analyzing links pointing to them, rather than keyword frequency alone. They incorporated Google Inc. on <time datetime="1998-09-04">September 4, 1998</time>.</p>
+        <article id="google">
+            <h3>3. Google &mdash; Organizing the Web at Scale</h3>
+            <p><strong>Milestone:</strong> Founding of Google Inc.</p>
+            <p><strong>Year:</strong> <time datetime="1998">1998</time></p>
 
-				<h4>Why it mattered</h4>
-				<p>Google&rsquo;s link-based ranking made the rapidly growing web navigable and searchable at scale, becoming the dominant way people found information online and shaping how the web&rsquo;s content economy developed.</p>
+            <h4>Event</h4>
+            <p>Larry Page and Sergey Brin, Stanford PhD students, developed a search engine (&ldquo;BackRub&rdquo;) that ranked pages by analyzing links pointing to them, rather than keyword frequency alone. They incorporated Google Inc. on <time datetime="1998-09-04">September 4, 1998</time>.</p>
 
-				<h4>Sources</h4>
-				<ol start="7">
-					<li id="ref7">Encyclopaedia Britannica, &ldquo;Larry Page.&rdquo; [Online]. Available: <a href="https://www.britannica.com/money/Larry-Page">https://www.britannica.com/money/Larry-Page</a>. [Accessed: Sep. 13, 2026].</li>
-					<li id="ref8">&ldquo;A Guide to Google: Origins, History and Key Moments in Search,&rdquo; <cite>Search Engine Land</cite>. [Online]. Available: <a href="https://searchengineland.com/guide/google">https://searchengineland.com/guide/google</a>. [Accessed: Sep. 13, 2026].</li>
-					<li id="ref9">&ldquo;Google Is Incorporated,&rdquo; <cite>Sky HISTORY</cite>. [Online]. Available: <a href="https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated">https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated</a>. [Accessed: Sep. 13, 2026].</li>
-				</ol>
-			</article>
+            <h4>Why it mattered</h4>
+            <p>Google&rsquo;s link-based ranking made the rapidly growing web navigable and searchable at scale, becoming the dominant way people found information online and shaping how the web&rsquo;s content economy developed.</p>
 
-		</section>
+            <h4>Sources</h4>
+            <ol start="7">
+                <li id="ref7">Encyclopaedia Britannica, &ldquo;Larry Page.&rdquo; [Online]. Available: <a href="https://www.britannica.com/money/Larry-Page">https://www.britannica.com/money/Larry-Page</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref8">&ldquo;A Guide to Google: Origins, History and Key Moments in Search,&rdquo; <cite>Search Engine Land</cite>. [Online]. Available: <a href="https://searchengineland.com/guide/google">https://searchengineland.com/guide/google</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref9">&ldquo;Google Is Incorporated,&rdquo; <cite>Sky HISTORY</cite>. [Online]. Available: <a href="https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated">https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated</a>. [Accessed: Sep. 13, 2026].</li>
+            </ol>
+        </article>
 
-	</main>
+    </section>
 
-	<footer>
-		<nav aria-label="Page links">
-			<ul>
-				<li><a href="#introduction">Back to Introduction</a></li>
-				<li><a href="internet-history-ai.html">Previous: The History of the Internet</a></li>
-			</ul>
-		</nav>
-		<p>Web Programming — built with Flask and deployed on Render.</p>
-		<p>
-			This website is created for educational purposes
-			only, as part of the GIN446 - Web Programming course,
-			School of Engineering, USEK. (Fall 2026-2027)
-		</p>
-	</footer>
+</main>
+{% endblock %}
 
-</body>
-</html>
+{% block footer_nav %}
+<nav aria-label="Page links">
+    <ul>
+        <li><a href="#introduction">Back to Introduction</a></li>
+        <li><a href="{{ url_for('internet_history_ai') }}">Previous: The History of the Internet</a></li>
+    </ul>
+</nav>
+{% endblock %}

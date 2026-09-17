@@ -4,19 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}{% endblock %}
     <title>{% block title %}My Web Programming Portfolio{% endblock %}</title>
 </head>
 <body>
+    {% block header %}
     <header>
         <h1>Web Programming Portfolio — Jean El Beainy</h1>
         <p>The beginning of the course GIN446 with my personal project that will grow every week.</p>
         <p>A live site that grows one page or feature every week.</p>
     </header>
+    {% endblock %}
 
     {% block content %}{% endblock %}
 
+    {% block footer %}
     <footer>
         <p>Web Programming — built with Flask and deployed on Render.</p>
     </footer>
+    {% endblock %}
 </body>
 </html>

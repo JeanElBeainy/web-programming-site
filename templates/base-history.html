@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{# Shell for the history pages: a page <h1> instead of the portfolio header, and
+   the course footer with the educational-use paragraph. Child pages must set
+   page_title; they fill content (and optionally nav, head, footer_nav). #}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block header %}
+    <header>
+        <h1>{{ page_title }}</h1>
+        {% block nav %}{% endblock %}
+    </header>
+{% endblock %}
+
+{% block footer %}
+    <footer>
+        {% block footer_nav %}{% endblock %}
+        <p>Web Programming — built with Flask and deployed on Render.</p>
+        <p>
+            This website is created for educational purposes
+            only, as part of the GIN446 - Web Programming course,
+            School of Engineering, USEK. (Fall 2026-2027)
+        </p>
+    </footer>
+{% endblock %}

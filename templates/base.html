@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}My Web Programming Portfolio{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Web Programming Portfolio — Jean El Beainy</h1>
+        <p>The beginning of the course GIN446 with my personal project that will grow every week.</p>
+        <p>A live site that grows one page or feature every week.</p>
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <footer>
+        <p>Web Programming — built with Flask and deployed on Render.</p>
+    </footer>
+</body>
+</html>

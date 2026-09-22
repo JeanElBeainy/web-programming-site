@@ -5,13 +5,19 @@
    Design: "Prompt" — a cool, crisp, white page. A well-kept man page:
    nothing decorative, everything legible.
 
+   MOBILE-FIRST. Every rule outside a media query is the phone layout.
+   From there, @media (min-width: …) queries in section 8 add room as the
+   screen grows. Never write a desktop value as a default and undo it for
+   phones — a 375px screen should never have to un-inherit anything.
+
    The whole site themes from the variables in :root. Change a value there
    and every page that extends base.html follows.
 
-   Markup this targets (no class attributes exist anywhere in the templates):
-     body > header          h1 + tagline <p>s  (or h1 + nav on history pages)
-     body > main > section  > article > h3, p, ul, ol, h4
+   Markup this targets:
+     body > header          h1 (+ .brand/.logo) and tagline <p>s, or nav
+     body > main > section  > article > h2/h3/h4, p, ul, ol, table
      body > footer          <p>s  (+ optional nav)
+     ul.weekly-list         the home page's weekly grid
    ========================================================================== */
 
 :root {
@@ -269,13 +275,15 @@ main,
 footer {
   max-width: var(--measure);
   margin-inline: auto;
-  padding-inline: var(--sp-3);
+  /* 16px of gutter on a phone. A 375px screen has no width to spare, and
+     past 40em the column is capped by --measure anyway. */
+  padding-inline: var(--sp-2);
 }
 
 /* ---- Header: title (and logo) + taglines ------------------------------ */
 
 header {
-  padding-block: var(--sp-8) var(--sp-4);
+  padding-block: var(--sp-6) var(--sp-3);
   border-block-end: var(--border-w) solid var(--border);
 }
 
@@ -293,21 +301,21 @@ header nav {
 /* ---- Main: sections are the page divisions ---------------------------- */
 
 main {
-  padding-block: var(--sp-4) var(--sp-8);
+  padding-block: var(--sp-2) var(--sp-6);
 }
 
 section {
-  padding-block: var(--sp-11);
+  padding-block: var(--sp-6);
   border-block-end: var(--border-w) solid var(--border);
 }
 
 /* Tighter first section, so the page does not open with a void. */
 main > section:first-child {
-  padding-block-start: var(--sp-6);
+  padding-block-start: var(--sp-3);
 }
 
 main > section:last-child {
-  padding-block-end: var(--sp-6);
+  padding-block-end: var(--sp-5);
   border-block-end: 0;
 }
 
@@ -361,6 +369,11 @@ nav a {
   font-family: var(--font-mono);
   font-size: 0.875rem;
   text-decoration: none;
+  /* Block padding on an inline link grows the tap target without touching
+     the line box, so the text never moves — it just becomes easier to hit
+     with a thumb. Kept under half the list gap so neighbouring links do
+     not end up with overlapping hit areas. */
+  padding-block: 4px;
 }
 
 nav a:hover {
@@ -385,7 +398,7 @@ nav ul {
 }
 
 nav li {
-  margin-block: 4px;
+  margin-block: var(--sp-1);
 }
 
 /* --- Flat navs: one row, evenly spaced, centred, wrapping -------------- */
@@ -409,7 +422,7 @@ nav:not(:has(ul ul)) > ul > li {
 
 /* Bare anchors read better as crisp chips than as plain links. */
 nav:not(:has(ul)) > a {
-  padding: 4px 10px;
+  padding: 6px 10px;
   line-height: 1.4;
   color: var(--text);
   background: var(--bg);
@@ -488,7 +501,7 @@ table {
   width: 100%;
   margin-block: var(--sp-3);
   border-collapse: collapse;
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
 }
 
 caption {
@@ -502,7 +515,7 @@ caption {
 
 th,
 td {
-  padding: var(--sp-1) var(--sp-2);
+  padding: var(--sp-1);
   text-align: left;
   vertical-align: top;
   border-block-end: var(--border-w) solid var(--border);
@@ -532,7 +545,7 @@ tbody tr:hover {
 }
 
 /* ==========================================================================
-   7. Focus, motion, and small screens
+   7. Focus and motion — not width-dependent, so no media query
    ========================================================================== */
 
 :focus-visible {
@@ -554,28 +567,68 @@ tbody tr:hover {
   }
 }
 
-@media (max-width: 640px) {
-  :root {
-    --sp-11: var(--sp-6);   /* 88px of section air becomes 48px */
-  }
+/* ==========================================================================
+   8. Responsive — widening the phone layout above
+   Each query only ever ADDS room. Nothing here is a correction to the
+   defaults, which is what keeps the phone layout honest.
 
+   40em (640px) is the one real transition in this design. Past it the
+   viewport is wider than --measure plus its gutters, so the text column
+   stops being bounded by the screen and starts being capped and centred.
+   Below it, every extra pixel of padding comes straight out of the line.
+
+   64em (1024px) only relaxes the timeline table — the one component that
+   genuinely reads better with wider cells. A third tier for the rest of
+   the page would be decoration: the column is already capped at --measure,
+   so a 1024px screen and a 1920px screen lay out identically.
+
+   Queries are in em, not px, so they track the reader's own font-size
+   setting instead of leaving the breakpoints behind when they zoom.
+   ========================================================================== */
+
+@media (min-width: 40em) {
   header,
   main,
   footer {
-    padding-inline: var(--sp-2);
+    padding-inline: var(--sp-3);
   }
 
   header {
-    padding-block: var(--sp-6) var(--sp-3);
+    padding-block: var(--sp-8) var(--sp-4);
+  }
+
+  main {
+    padding-block: var(--sp-4) var(--sp-8);
+  }
+
+  section {
+    padding-block: var(--sp-11);
+  }
+
+  main > section:first-child {
+    padding-block-start: var(--sp-6);
+  }
+
+  main > section:last-child {
+    padding-block-end: var(--sp-6);
+  }
+
+  table {
+    font-size: 0.9375rem;
   }
 
   th,
   td {
-    padding: var(--sp-1);
+    padding: var(--sp-1) var(--sp-2);
   }
+}
 
-  table {
-    font-size: 0.875rem;
+@media (min-width: 64em) {
+  /* Taller rows, but the inline padding stays put: horizontal padding is
+     the one thing the narrow YEAR column cannot afford to give away. */
+  th,
+  td {
+    padding-block: var(--sp-2);
   }
 }
 

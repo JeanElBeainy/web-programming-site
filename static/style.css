@@ -39,6 +39,10 @@
                            narrower reading column, or widen to ~80ch
                            if the history-page tables feel cramped */
 
+  /* ---- Layout --------------------------------------------------------- */
+  --gallery-min: 240px; /* narrowest a weekly-work card may get before
+                           the grid drops to fewer columns             */
+
   /* ---- Space — 8px base ----------------------------------------------- */
   --sp-1:  8px;
   --sp-2: 16px;
@@ -122,6 +126,9 @@ h4 {
   font-weight: 600;
   line-height: var(--lh-heading);
   color: var(--text);
+  /* Evens out the line lengths instead of leaving one long line above a
+     short one — most visible on the two-line portfolio title. */
+  text-wrap: balance;
 }
 
 h1 {
@@ -157,6 +164,8 @@ h4 {
 
 p {
   margin: 0 0 var(--sp-2);
+  /* Avoids a single dangling word on the last line of a paragraph. */
+  text-wrap: pretty;
 }
 
 p:last-child {
@@ -335,58 +344,18 @@ footer p:last-child {
 
 /* ==========================================================================
    4. Navigation
-   Two shapes exist in the templates and both are handled here:
-     • bare anchor row   — <nav><a>…</a></nav>         (hand-written pages)
-     • labelled list     — <nav><h2>…</h2><ul>…</ul>   (AI pages, footers)
+   Three shapes exist in the templates:
+     • bare anchors     <nav><a>…</a></nav>                (hand-written pages)
+     • flat link list   <nav><ul><li><a>…</a></li></ul></nav>  (site nav, footers)
+     • nested contents  <nav><ul>…<ul>…</ul></ul></nav>     (AI page Contents)
+
+   The first two are a row of destinations, so they lay out with Flexbox.
+   The third is a table of contents — flattening it into a row would put
+   its sub-links inline beside their parent, so it stays stacked.
+   :has() does the discrimination, so no markup has to distinguish them.
    ========================================================================== */
 
-/* Shape 1: bare anchors become a wrapping row of crisp chips. */
-nav > a {
-  display: inline-block;
-  margin: 0 var(--sp-1) var(--sp-1) 0;
-  padding: 4px 10px;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  line-height: 1.4;
-  color: var(--text);
-  background: var(--bg);
-  border: var(--border-w) solid var(--border);
-  border-radius: var(--radius);
-  text-decoration: none;
-  transition: color var(--dur) var(--ease),
-              background-color var(--dur) var(--ease),
-              border-color var(--dur) var(--ease);
-}
-
-nav > a:hover {
-  color: var(--accent);
-  background: var(--surface);
-  border-color: var(--accent);
-}
-
-/* Shape 2: a labelled list of links, stacked like a man page's SEE ALSO. */
-nav h2 {
-  margin: 0 0 var(--sp-1);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-nav li {
-  margin-block: 4px;
-}
-
-nav li::marker {
-  content: "";
-}
+/* --- Shared link styling ----------------------------------------------- */
 
 nav a {
   font-family: var(--font-mono);
@@ -399,7 +368,67 @@ nav a:hover {
   text-underline-offset: 4px;
 }
 
-/* Nested sub-links in the AI "Contents" nav hang off a hairline rule. */
+nav h2 {
+  margin: 0 0 var(--sp-1);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Strip the list chrome off every nav list. */
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  margin-block: 4px;
+}
+
+/* --- Flat navs: one row, evenly spaced, centred, wrapping -------------- */
+
+nav:not(:has(ul)),
+nav:not(:has(ul ul)) > ul {
+  display: flex;
+  flex-wrap: wrap;            /* wraps on small screens   */
+  align-items: center;        /* vertically centred       */
+  justify-content: flex-start;
+  /* A constant gap is what keeps the spacing even. space-between would
+     hand every leftover pixel to the first line and none to the last,
+     so a wrapped nav comes out ragged instead of evenly spaced. */
+  gap: var(--sp-2) var(--sp-3);
+}
+
+/* The row owns the spacing, so its items carry none. */
+nav:not(:has(ul ul)) > ul > li {
+  margin: 0;
+}
+
+/* Bare anchors read better as crisp chips than as plain links. */
+nav:not(:has(ul)) > a {
+  padding: 4px 10px;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  transition: color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+nav:not(:has(ul)) > a:hover {
+  color: var(--accent);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+/* --- Nested contents navs keep their stacked layout -------------------- */
+
+/* Sub-links hang off a hairline rule under their parent entry. */
 nav ul ul {
   margin-block-start: 4px;
   padding-inline-start: var(--sp-2);
@@ -407,7 +436,52 @@ nav ul ul {
 }
 
 /* ==========================================================================
-   5. Tables — the "Timeline at a glance" blocks on the AI pages
+   5. Weekly Work list — a responsive card gallery
+   Add class="weekly-list" to the <ul> inside the "Weekly Work" section of
+   index.html. No wrapper element is needed; the list itself is the grid.
+
+   auto-fit + minmax means the column count follows the available width,
+   and min() keeps a card from overflowing a viewport narrower than
+   --gallery-min once the padding is taken off.
+   ========================================================================== */
+
+.weekly-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--gallery-min), 100%), 1fr));
+  gap: var(--sp-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The grid gap owns the spacing; the square markers make no sense here. */
+.weekly-list > li {
+  margin: 0;
+}
+
+/* Each link fills its cell, so the whole card is the click target. */
+.weekly-list a {
+  display: block;
+  height: 100%;
+  padding: var(--sp-2);
+  color: var(--text);
+  background: var(--bg);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+.weekly-list a:hover {
+  color: var(--accent);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+/* ==========================================================================
+   6. Tables — the "Timeline at a glance" blocks on the AI pages
    ========================================================================== */
 
 table {
@@ -458,7 +532,7 @@ tbody tr:hover {
 }
 
 /* ==========================================================================
-   6. Focus, motion, and small screens
+   7. Focus, motion, and small screens
    ========================================================================== */
 
 :focus-visible {

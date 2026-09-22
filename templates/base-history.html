@@ -9,6 +9,8 @@
 {% block header %}
     <header>
         <h1>{{ page_title }}</h1>
+        {# The site nav is defined in base.html, so it lives in one place only. #}
+        {{ self.site_nav() }}
         {% block nav %}{% endblock %}
     </header>
 {% endblock %}

@@ -522,13 +522,16 @@ tbody tr:hover {
 /* Header row holding the logo monogram beside the site title. */
 .brand {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: var(--sp-2);
   margin-block-end: var(--sp-2);
 }
 
+/* Shrinks and wraps its own text instead of pushing itself onto a new
+   flex line, so the monogram always sits beside the title. */
 .brand h1 {
+  flex: 1;
+  min-width: 0;
   margin: 0;
 }
 

@@ -10,9 +10,25 @@
 <body>
     {% block header %}
     <header>
-        <h1>Web Programming Portfolio — Jean El Beainy</h1>
+        <div class="brand">
+            <a class="logo" href="{{ url_for('home') }}" aria-label="Home">JE</a>
+            <h1>Web Programming Portfolio — Jean El Beainy</h1>
+        </div>
         <p>The beginning of the course GIN446 with my personal project that will grow every week.</p>
         <p>A live site that grows one page or feature every week.</p>
+        {# Defined here once. base-history.html pulls it in with self.site_nav(),
+           so adding a page means editing this list in one place only. #}
+        {% block site_nav %}
+        <nav aria-label="Site">
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('internet_history') }}">Internet History</a></li>
+                <li><a href="{{ url_for('web_history') }}">History of the Web</a></li>
+                <li><a href="{{ url_for('internet_history_ai') }}">Internet History (AI)</a></li>
+                <li><a href="{{ url_for('web_history_ai') }}">History of the Web (AI)</a></li>
+            </ul>
+        </nav>
+        {% endblock %}
     </header>
     {% endblock %}
 

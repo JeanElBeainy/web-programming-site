@@ -1,5 +1,123 @@
 {% extends "base.html" %}
 
+{% block title %}Engineering Student Profile{% endblock %}
+{% block content %}
+<h2>Engineering Student Profile</h2>
+<p>Complete this form to provide information about your
+academic background, technical skills, internship
+experience, and Final Year Project preferences.</p>
+<form action="{{ url_for('submit_profile') }}" method="post">
+    <section>
+        <h1>1. Personal Information</h1>
+        <p>Student ID: <input type="text" name="student_id" required></p>
+        <p>Full Name: <input type="text" name="fullname" required></p>
+        <p>USEK Email: <input type="email" name="email" required></p>
+        <p>Mobile Number: <input type="tel" name="phone" required></p>
+        <p>Date of Birth: <input type="date" name="birthdate" required></p>
+        <p>GitHub: <input type="text" name="portfolio" required></p>
+        <p>GIN446 website: <input type="text" name="gin446" required></p>    
+    </section>
+    
+    <section>
+        <h1>2. Academic Information</h1>
+        <p>Engineering Major: <input type="text" name="major" required></p>
+        <p>Current GPA /100: <input type="number" name="gpa" required></p>
+        <p>Credits Completed: <input type="number" name="credits" required></p>
+        <p>Expected Graduation:
+            <div>
+                <input type="radio" name="graduation" value="spring" required> Spring</input>
+                <input type="radio" name="graduation" value="summer" required> Summer</input>
+                <input type="radio" name="graduation" value="fall" required> Fall</input>
+            </div>
+        </p>
+        <p>Expected Graduation Month & Year: <input type="date" name="graduation_month" required></p>
+        <p>Have you completed an engineering internship?
+            <div>
+                <input type="radio" name="internship_completed" value="yes" required> Yes</input>
+                <input type="radio" name="internship_completed" value="no" required> No</input>
+            </div>
+        </p>
+    </section>
+
+    <section>
+        <h1>3. Technical Background</h1>
+        <p>Select all areas which you have experience:</p>
+        <div>
+            <input type="checkbox" name="skills" value="programming">Programming</input>
+            <input type="checkbox" name="skills" value="embedded-systems">Embedded Systems</input>
+            <input type="checkbox" name="skills" value="electronics">Electronics</input>
+            <input type="checkbox" name="skills" value="computer-networks">Computer Networks</input>
+            <input type="checkbox" name="skills" value="telecommunications">Telecommunications</input>
+            <input type="checkbox" name="skills" value="biomedical-instrumentation">Biomedical Instrumentation</input>
+            <input type="checkbox" name="skills" value="artificial-intelligence">Artificial Intelligence / Machine Learning</input>
+            <input type="checkbox" name="skills" value="signal-processing">Signal Processing</input>
+        </div>
+        <p>Primary programming language: <input type="text" name="primary_language" required></p>
+        <p>Engineering Software Used:
+            <select name="software" multiple>
+                <option value="matlab">MATLAB</option>
+                <option value="Simulink">Simulink</option>
+                <option value="labview">LabVIEW</option>
+                <option value="ltspice">LTspice</option>
+                <option value="vivado">Vivado</option>
+                <option value="solidworks">SolidWorks</option>
+                <option value="multisim">Multisim</option>
+                <option value="proteus">Proteus</option>
+                <option value="pspice">PSpice</option>
+                <option value="other">Other</option>
+            </select>
+            Hold Ctrl (Windows) or Command (Mac) to select multiple options.
+        </p>
+    </section>
+
+    <section>
+        <h1>4. Final Year Project</h1>
+        <p>Proposed Project Title: <input type="text" name="project_title" placeholder="Enter a tentative project title" required></p>
+        <p>Preferred Project Area:
+            <select name="project_area" required>
+                <option value="artificial-intelligence" selected>Artificial Intelligence</option>
+                <optgroup label="Computer Engineering">
+                    <option value="computer-engineering">Artificial Intelligence</option>
+                    <option value="web-applications">Web Applications</option>
+                    <option value="cybersecurity">Cybersecurity</option>
+                    <option value="internet-of-things">Internet of Things</option>
+                </optgroup>
+                <optgroup label="Electrical Engineering">
+                    <option value="power-systems">Power Systems</option>
+                    <option value="renewable-energy">Renewable Energy</option>
+                    <option value="control-systems">Control Systems</option>
+                </optgroup>
+                <optgroup label="Biomedical Engineering">
+                    <option value="medical-imaging">Medical Imaging</option>
+                    <option value="biosensors">Biosensors</option>
+                    <option value="medical-devices">Medical Devices</option>
+                </optgroup>
+                <optgroup label="Telecommunications Engineering">
+                    <option value="wireless-communications">Wireless Communications</option>
+                    <option value="5g-6g-networks">5G / 6G Networks</option>
+                </optgroup>
+            </select>
+        </p>
+        <p>Brief Project Description:<br>
+            <textarea name="description" rows="4" placeholder="Describe the problem, proposed solution, and expected outcome..." required></textarea>
+        </p>
+        <p>Preferred Team Size: <input type="number" name="team_size" value="2" required></p>
+        <p>Choose a color for your project dashboard: <input type="color" name="project_color" required></p>
+        <p>Preferred Meeting Date: <input type="date" name="meeting_date" required></p>
+        <p>Preferred Meeting Time: <input type="time" name="meeting_time" required></p>
+    </section>
+
+    <section>
+        <h1>5. Confirmation</h1>
+        <p>
+            <input type="checkbox" name="confirmation" required> I confirm that the information provided is accurate.
+        </p>
+        <p>
+            <button type="submit">Submit Profile</button>
+            <button type="reset">Clear Form</button>
+        </p>
+    </section>
+</form>
 
 
 {% endblock %}

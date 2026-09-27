@@ -11,8 +11,7 @@
        step label here.
 
    Deliberately absent: any re-declared :root variable, any font stack, any
-   hand-picked colour. The one exception is noted at the select and the
-   validation rule.
+   hand-picked colour, any image.
 
    MOBILE-FIRST, like the site stylesheet: every rule outside section 7 is
    the phone layout, and each media query only ever adds room.
@@ -27,10 +26,6 @@
 
 form {
   margin-block-start: var(--sp-2);
-  /* The form is the only page that has to report something going wrong, so
-     it brings its own signal colour rather than borrowing one from the
-     palette — green already means "accent", not "error". */
-  --invalid: #B3261E;   /* 6.4:1 on --bg */
 }
 
 /* ==========================================================================
@@ -137,18 +132,14 @@ textarea {
    3. Selects
    ========================================================================== */
 
+/* The arrow is the browser's own, and deliberately so. Drawing a chevron
+   means `appearance: none` plus an SVG data URI, and a data URI cannot read
+   a custom property — so the arrow could only be painted by writing
+   --accent's value out by hand, giving the palette a second source of truth
+   that would quietly drift. The native arrow also follows the control's text
+   colour and is the arrow the reader's own platform taught them. */
 select:not([multiple]) {
-  appearance: none;
   cursor: pointer;
-  /* The chevron is an SVG data URI, and a data URI cannot read a custom
-     property, so --accent (#0E7A44) is written out here. If the palette
-     changes, this stroke is the one place to change by hand. */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%230E7A44' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px 8px;
-  /* Room for the chevron, so long option text never runs underneath it. */
-  padding-inline-end: calc(10px + 12px + var(--sp-1));
 }
 
 select[multiple] {
@@ -276,17 +267,8 @@ button[type="submit"]:hover {
 }
 
 /* ==========================================================================
-   6. Focus and validation
+   6. Focus
    ========================================================================== */
-
-/* Every field is required, so :invalid would light the whole form up red on
-   arrival. :user-invalid only fires once the field has been left in a bad
-   state, which is the point at which the reader can do something about it. */
-input:not([type="checkbox"], [type="radio"], [type="color"]):user-invalid,
-select:user-invalid,
-textarea:user-invalid {
-  border-color: var(--invalid);
-}
 
 /* The site's focus ring, restated for the controls: the 2px outline becomes
    a soft ring hugging the border, which reads better on a field than a hard

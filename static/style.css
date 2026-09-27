@@ -350,6 +350,34 @@ footer p:last-child {
   margin-block-end: 0;
 }
 
+/* ---- The profile page ------------------------------------------------ */
+
+/* templates/profile.html is the instructor's, and it is not to be edited. It
+   wraps its content in <article class="profile"> rather than <main>, so the
+   reading column above never reaches it: the article sits flush against the
+   left edge while the site header over it stays centred.
+
+   Two rules are needed, not one. Centring the article gets it off the edge,
+   but the article's own <header> still matches the bare `header` selector
+   above, so it would then centre itself *inside* the article while the
+   <section>s under it stayed full width — the profile title and the profile
+   sections would not line up with each other. Inside the article that
+   <header> is the top of the profile, not a site header, so it is released
+   from the site rule and fills the article like the sections do.
+
+   The article's own max-width (860px, set in the page's head) is left alone:
+   it only needs the centring and the gutter. */
+.profile {
+  margin-inline: auto;
+  padding-inline: var(--sp-2);
+}
+
+.profile > header {
+  max-width: none;
+  margin-inline: 0;
+  padding-inline: 0;
+}
+
 /* ==========================================================================
    4. Navigation
    Three shapes exist in the templates:
@@ -589,7 +617,8 @@ tbody tr:hover {
 @media (min-width: 40em) {
   header,
   main,
-  footer {
+  footer,
+  .profile {
     padding-inline: var(--sp-3);
   }
 

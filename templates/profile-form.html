@@ -2,15 +2,10 @@
 
 {% block title %}Engineering Student Profile{% endblock %}
 
-{# Loaded after style.css, which base.html links first — so this stylesheet
-   can override or extend the site styles for the form page only. #}
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='form_style.css') }}">
 {% endblock %}
 
-{# <main> is what puts this page in the site's reading column: style.css
-   gives header, main and footer the same max-width and gutters. Without it
-   the form has nothing to constrain it and stretches to the window edge. #}
 {% block content %}
 <main>
 <h2>Engineering Student Profile</h2>
@@ -18,54 +13,171 @@
 academic background, technical skills, internship
 experience, and Final Year Project preferences.</p>
 <form action="{{ url_for('submit_profile') }}" method="post">
-    <section>
-        <h1>1. Personal Information</h1>
-        <p>Student ID: <input type="text" name="student_id" required></p>
-        <p>Full Name: <input type="text" name="fullname" required></p>
-        <p>USEK Email: <input type="email" name="email" required></p>
-        <p>Mobile Number: <input type="tel" name="phone" required></p>
-        <p>Date of Birth: <input type="date" name="birthdate" required></p>
-        <p>GitHub: <input type="text" name="portfolio" required></p>
-        <p>GIN446 website: <input type="text" name="gin446" required></p>    
-    </section>
-    
-    <section>
-        <h1>2. Academic Information</h1>
-        <p>Engineering Major: <input type="text" name="major" required></p>
-        <p>Current GPA /100: <input type="number" name="gpa" required></p>
-        <p>Credits Completed: <input type="number" name="credits" required></p>
-        <p>Expected Graduation:
-            <div>
-                <input type="radio" name="graduation" value="spring" required> Spring</input>
-                <input type="radio" name="graduation" value="summer" required> Summer</input>
-                <input type="radio" name="graduation" value="fall" required> Fall</input>
-            </div>
-        </p>
-        <p>Expected Graduation Month & Year: <input type="date" name="graduation_month" required></p>
-        <p>Have you completed an engineering internship?
-            <div>
-                <input type="radio" name="internship_completed" value="yes" required> Yes</input>
-                <input type="radio" name="internship_completed" value="no" required> No</input>
-            </div>
-        </p>
-    </section>
+    <input type="hidden" name="form_version" value="2026-2027">
 
-    <section>
-        <h1>3. Technical Background</h1>
-        <p>Select all areas which you have experience:</p>
-        <div>
-            <input type="checkbox" name="skills" value="programming">Programming</input>
-            <input type="checkbox" name="skills" value="embedded-systems">Embedded Systems</input>
-            <input type="checkbox" name="skills" value="electronics">Electronics</input>
-            <input type="checkbox" name="skills" value="computer-networks">Computer Networks</input>
-            <input type="checkbox" name="skills" value="telecommunications">Telecommunications</input>
-            <input type="checkbox" name="skills" value="biomedical-instrumentation">Biomedical Instrumentation</input>
-            <input type="checkbox" name="skills" value="artificial-intelligence">Artificial Intelligence / Machine Learning</input>
-            <input type="checkbox" name="skills" value="signal-processing">Signal Processing</input>
-        </div>
-        <p>Primary programming language: <input type="text" name="primary_language" required></p>
-        <p>Engineering Software Used:
-            <select name="software" multiple size="10">
+    <fieldset>
+        <legend>1. Personal Information</legend>
+
+        <p>
+            <label for="student_id">Student ID</label>
+            <input type="text" id="student_id" name="student_id"
+                   inputmode="numeric" pattern="[0-9]{9}" minlength="9" maxlength="9"
+                   title="Nine digits, for example 202312345" placeholder="202400280" required>
+        </p>
+
+        <p>
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname"
+                    placeholder="First name and last name" maxlength="80" required>
+        </p>
+
+        <p>
+            <label for="email">USEK Email</label>
+            <input type="email" id="email" name="email" placeholder="student@net.usek.edu.lb" maxlength="80" required>
+        </p>
+
+        <p>
+            <label for="phone">Mobile Number</label>
+            <input type="tel" id="phone" name="phone" pattern="\+?[0-9][0-9 -]{6,19}" maxlength="20"
+                title="Digits, spaces and hyphens only, for example +961 71 123456" placeholder="+961 70 123456" required>
+        </p>
+
+        <p>
+            <label for="birthdate">Date of Birth</label>
+            <input type="date" id="birthdate" name="birthdate" required>
+        </p>
+
+        <p>
+            <label for="portfolio">GitHub</label>
+            <input type="url" id="portfolio" name="portfolio"
+                maxlength="200" placeholder="https://github.com/username" required>
+        </p>
+
+        <p>
+            <label for="gin446">GIN446 website</label>
+            <input type="url" id="gin446" name="gin446"
+                maxlength="200" placeholder="Your RENDER website link" required>
+        </p>
+    </fieldset>
+
+    <fieldset>
+        <legend>2. Academic Information</legend>
+
+        <p>
+            <label for="major">Engineering Major</label>
+            <input type="text" id="major" name="major" maxlength="40" required>
+        </p>
+
+        <p>
+            <label for="gpa">Current GPA /100</label>
+            <input type="number" id="gpa" name="gpa" min="40" max="100" step="0.01" placeholder="85.50" required>
+        </p>
+
+        <p>
+            <label for="credits">Credits Completed</label>
+            <input type="number" id="credits" name="credits" min="0" max="148" step="1" required>
+        </p>
+
+        <fieldset>
+            <legend>Expected graduation</legend>
+            <ul>
+                <li>
+                    <input type="radio" id="graduation-spring" name="graduation" value="spring" required>
+                    <label for="graduation-spring">Spring</label>
+                </li>
+                <li>
+                    <input type="radio" id="graduation-summer" name="graduation" value="summer">
+                    <label for="graduation-summer">Summer</label>
+                </li>
+                <li>
+                    <input type="radio" id="graduation-fall" name="graduation" value="fall">
+                    <label for="graduation-fall">Fall</label>
+                </li>
+            </ul>
+        </fieldset>
+
+        <p>
+            <label for="graduation_month">Expected Graduation Month &amp; Year</label>
+            <input type="month" id="graduation_month" name="graduation_month" required>
+        </p>
+
+        <fieldset>
+            <legend>Have you completed an engineering internship?</legend>
+            <ul>
+                <li>
+                    <input type="radio" id="internship-yes" name="internship_completed" value="yes" required>
+                    <label for="internship-yes">Yes</label>
+                </li>
+                <li>
+                    <input type="radio" id="internship-no" name="internship_completed" value="no">
+                    <label for="internship-no">No</label>
+                </li>
+            </ul>
+        </fieldset>
+    </fieldset>
+
+    <fieldset>
+        <legend>3. Technical Background</legend>
+
+        <fieldset>
+            <legend>Select all areas which you have experience</legend>
+            <ul>
+                <li>
+                    <input type="checkbox" id="skills-programming" name="skills" value="programming">
+                    <label for="skills-programming">Programming</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="skills-embedded" name="skills" value="embedded-systems">
+                    <label for="skills-embedded">Embedded Systems</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="skills-electronics" name="skills" value="electronics">
+                    <label for="skills-electronics">Electronics</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="skills-networks" name="skills" value="computer-networks">
+                    <label for="skills-networks">Computer Networks</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="skills-telecom" name="skills" value="telecommunications">
+                    <label for="skills-telecom">Telecommunications</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="skills-biomedical" name="skills" value="biomedical-instrumentation">
+                    <label for="skills-biomedical">Biomedical Instrumentation</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="skills-ai" name="skills" value="artificial-intelligence">
+                    <label for="skills-ai">Artificial Intelligence / Machine Learning</label>
+                </li>
+                <li>
+                    <input type="checkbox" id="skills-signal" name="skills" value="signal-processing">
+                    <label for="skills-signal">Signal Processing</label>
+                </li>
+            </ul>
+        </fieldset>
+
+        <p>
+            <label for="language">Primary programming language</label>
+            <input type="text" id="language" name="language" list="languages"
+                maxlength="40" placeholder="Start typing..." required>
+            <datalist id="languages">
+                <option value="C"></option>
+                <option value="C++"></option>
+                <option value="C#"></option>
+                <option value="Java"></option>
+                <option value="JavaScript"></option>
+                <option value="MATLAB"></option>
+                <option value="Python"></option>
+                <option value="Verilog"></option>
+                <option value="VHDL"></option>
+            </datalist>
+        </p>
+
+        <p>
+            <label for="software">Engineering Software Used</label>
+            <select id="software" name="software" multiple size="10"
+                aria-describedby="software-hint">
                 <option value="matlab">MATLAB</option>
                 <option value="Simulink">Simulink</option>
                 <option value="labview">LabVIEW</option>
@@ -77,17 +189,26 @@ experience, and Final Year Project preferences.</p>
                 <option value="pspice">PSpice</option>
                 <option value="other">Other</option>
             </select>
-            Hold Ctrl (Windows) or Command (Mac) to select multiple options.
+            <small id="software-hint">
+                Hold Ctrl (Windows) or Command (Mac) to select more than one.
+            </small>
         </p>
-    </section>
+    </fieldset>
 
-    <section>
-        <h1>4. Final Year Project</h1>
-        <p>Proposed Project Title: <input type="text" name="project_title" placeholder="Enter a tentative project title" required></p>
-        <p>Preferred Project Area:
-            <select name="project_area" required>
+    <fieldset>
+        <legend>4. Final Year Project</legend>
+
+        <p>
+            <label for="project_title">Proposed Project Title</label>
+            <input type="text" id="project_title" name="project_title"
+                maxlength="120" placeholder="Enter a tentative project title" required>
+        </p>
+
+        <p>
+            <label for="project_area">Preferred Project Area</label>
+            <select id="project_area" name="project_area" required>
                 <optgroup label="Computer Engineering">
-                    <option value="computer-engineering">Artificial Intelligence</option>
+                    <option value="artificial-intelligence">Artificial Intelligence</option>
                     <option value="web-applications">Web Applications</option>
                     <option value="cybersecurity">Cybersecurity</option>
                     <option value="internet-of-things">Internet of Things</option>
@@ -108,25 +229,44 @@ experience, and Final Year Project preferences.</p>
                 </optgroup>
             </select>
         </p>
-        <p>Brief Project Description:<br>
-            <textarea name="description" rows="4" placeholder="Describe the problem, proposed solution, and expected outcome..." required></textarea>
-        </p>
-        <p>Preferred Team Size: <input type="number" name="team_size" value="2" required></p>
-        <p>Choose a color for your project dashboard: <input type="color" name="project_color" required></p>
-        <p>Preferred Meeting Date: <input type="date" name="meeting_date" required></p>
-        <p>Preferred Meeting Time: <input type="time" name="meeting_time" required></p>
-    </section>
 
-    <section>
-        <h1>5. Confirmation</h1>
         <p>
-            <input type="checkbox" name="confirmation" required> I confirm that the information provided is accurate.
+            <label for="description">Brief Project Description</label>
+            <textarea id="description" name="description" rows="4" maxlength="1000"
+                placeholder="Describe the problem, proposed solution, and expected outcome..." required>
+            </textarea>
         </p>
+
         <p>
-            <button type="submit">Submit Profile</button>
-            <button type="reset">Clear Form</button>
+            <label for="team_size">Preferred Team Size</label>
+            <input type="number" id="team_size" name="team_size" min="1" max="4" step="1" value="2" required>
         </p>
-    </section>
+
+        <p>
+            <label for="project_color">Project dashboard colour</label>
+            <input type="color" id="project_color" name="project_color" value="#0e7a44" required>
+        </p>
+
+        <p>
+            <label for="meeting_date">Preferred Meeting Date</label>
+            <input type="date" id="meeting_date" name="meeting_date" required>
+        </p>
+
+        <p>
+            <label for="meeting_time">Preferred Meeting Time</label>
+            <input type="time" id="meeting_time" name="meeting_time" required>
+        </p>
+    </fieldset>
+
+    <p>
+        <input type="checkbox" id="confirmation" name="confirmation" required>
+        <label for="confirmation">I confirm that the information provided is accurate.</label>
+    </p>
+
+    <p>
+        <button type="submit">Submit Profile</button>
+        <button type="reset">Clear Form</button>
+    </p>
 </form>
 </main>
 

@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 
 {% block title %}Engineering Student Profile{% endblock %}
+
+{# Loaded after style.css, which base.html links first — so this stylesheet
+   can override or extend the site styles for the form page only. #}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='form_style.css') }}">
+{% endblock %}
+
+{# <main> is what puts this page in the site's reading column: style.css
+   gives header, main and footer the same max-width and gutters. Without it
+   the form has nothing to constrain it and stretches to the window edge. #}
 {% block content %}
+<main>
 <h2>Engineering Student Profile</h2>
 <p>Complete this form to provide information about your
 academic background, technical skills, internship
@@ -54,7 +65,7 @@ experience, and Final Year Project preferences.</p>
         </div>
         <p>Primary programming language: <input type="text" name="primary_language" required></p>
         <p>Engineering Software Used:
-            <select name="software" multiple>
+            <select name="software" multiple size="10">
                 <option value="matlab">MATLAB</option>
                 <option value="Simulink">Simulink</option>
                 <option value="labview">LabVIEW</option>
@@ -117,6 +128,6 @@ experience, and Final Year Project preferences.</p>
         </p>
     </section>
 </form>
-
+</main>
 
 {% endblock %}

@@ -2,7 +2,7 @@
 {% set page_title = "The History of the Web" %}
 
 {% block head %}
-    <meta name="description" content="The history of the World Wide Web and three key web technologies: the invention at CERN (1989-1991), the Mosaic browser (1993), and the founding of Google (1998).">
+    <meta name="description" content="The history of the World Wide Web in six milestones, from the invention at CERN in 1989 through the public-domain release and Mosaic, W3C standards, the scriptable web and HTML5, up to the web of today.">
 {% endblock %}
 
 {% block nav %}
@@ -10,11 +10,14 @@
     <h2>Contents</h2>
     <ul>
         <li><a href="#introduction">Introduction</a></li>
-        <li><a href="#key-technologies">Key Technologies of the Web</a>
+        <li><a href="#key-milestones">Key Milestones of the Web</a>
             <ul>
-                <li><a href="#www">1. World Wide Web &mdash; Invention at CERN</a></li>
-                <li><a href="#mosaic">2. Mosaic &mdash; The First Popular Web Browser</a></li>
-                <li><a href="#google">3. Google &mdash; Organizing the Web at Scale</a></li>
+                <li><a href="#www">1. Birth of the Web at CERN (1989&ndash;1991)</a></li>
+                <li><a href="#open-web">2. A free, open Web: public domain and Mosaic (1993)</a></li>
+                <li><a href="#standards">3. W3C standards (1994&ndash;1998)</a></li>
+                <li><a href="#dynamic-web">4. The dynamic, scriptable Web (1999&ndash;2005)</a></li>
+                <li><a href="#html5">5. The mobile Web and HTML5 (2007&ndash;2014)</a></li>
+                <li><a href="#modern-web">6. Today&rsquo;s Web (2014&ndash;2026)</a></li>
             </ul>
         </li>
         <li><a href="{{ url_for('internet_history_ai') }}">Companion page: The History of the Internet</a></li>
@@ -27,97 +30,170 @@
 
     <section id="introduction">
         <h2>Introduction</h2>
-        <p>The World Wide Web, or simply called the Web, is a system of documents that are linked together and can be accessed through the internet. It is not similar to the internet; the internet carries the data of the web which we find and share information on.</p>
-        <p>It all began between 1989 and 1991 when Tim Berners-Lee proposed a way for scientists to link their documents together in different computers without the need to exchange them manually. For this to be achievable, he created HTML to format the pages and HTTP to transfer them.</p>
-        <p>From this point, it started to expand and have seen multiple milestones such as the release of Mosaic browser in 1993 which made the web easy to access, and the founding of Google in 1998.</p>
+        <p>The World Wide Web, or simply called the Web, is a system of documents that are linked together and can be accessed through the internet. It is not the same thing as the internet; the internet is the network that carries the data of the Web.</p>
+        <p>It began between 1989 and 1991, when Tim Berners-Lee proposed a way for scientists to link their documents together on different computers without exchanging them manually, and it has been growing and changing ever since.</p>
+        <p>This page follows the Web itself across six milestones, from 1989 up to today: the invention at CERN, CERN&rsquo;s decision to give the Web away and the arrival of Mosaic, the W3C and open standards, the scriptable Web, the mobile Web and HTML5, and the Web platform as it stands in 2026.</p>
+        <p>The network underneath it is covered separately on the <a href="{{ url_for('internet_history_ai') }}">History of the Internet</a> page.</p>
     </section>
 
-    <section id="key-technologies">
-        <h2>Key Technologies of the Web</h2>
+    <section id="key-milestones">
+        <h2>Key Milestones of the Web</h2>
 
         <h3>Timeline at a glance</h3>
         <table>
-            <caption>Three key technologies in the history of the web</caption>
+            <caption>Six key milestones in the history of the Web, 1989&ndash;2026</caption>
             <thead>
                 <tr>
-                    <th scope="col">Technology</th>
                     <th scope="col">Milestone</th>
+                    <th scope="col">Event</th>
                     <th scope="col">Year</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row">World Wide Web (CERN)</th>
-                    <td>Creation of HTML, HTTP, and the URL</td>
+                    <td>Invention of the Web, and the first website</td>
                     <td><time datetime="1989">1989</time>&ndash;<time datetime="1991">1991</time></td>
                 </tr>
                 <tr>
-                    <th scope="row">Mosaic</th>
-                    <td>Public release of NCSA Mosaic</td>
+                    <th scope="row">A free, open Web</th>
+                    <td>Public-domain release and the NCSA Mosaic browser</td>
                     <td><time datetime="1993">1993</time></td>
                 </tr>
                 <tr>
-                    <th scope="row">Google</th>
-                    <td>Founding of Google Inc.</td>
-                    <td><time datetime="1998">1998</time></td>
+                    <th scope="row">W3C standards</th>
+                    <td>HTML 2.0, CSS1 and HTML 4 make the Web interoperable</td>
+                    <td><time datetime="1994">1994</time>&ndash;<time datetime="1998">1998</time></td>
+                </tr>
+                <tr>
+                    <th scope="row">The dynamic Web</th>
+                    <td>ECMAScript, XML and HTTP/1.1 make pages interactive</td>
+                    <td><time datetime="1999">1999</time>&ndash;<time datetime="2005">2005</time></td>
+                </tr>
+                <tr>
+                    <th scope="row">Mobile Web and HTML5</th>
+                    <td>Responsive browsing and the HTML5 Recommendation</td>
+                    <td><time datetime="2007">2007</time>&ndash;<time datetime="2014">2014</time></td>
+                </tr>
+                <tr>
+                    <th scope="row">Today&rsquo;s Web</th>
+                    <td>HTTP/2 and HTTP/3, and WebAssembly</td>
+                    <td><time datetime="2014">2014</time>&ndash;<time datetime="2026">2026</time></td>
                 </tr>
             </tbody>
         </table>
 
         <article id="www">
-            <h3>1. World Wide Web &mdash; Invention at CERN</h3>
-            <p><strong>Milestone:</strong> Creation of HTML, HTTP, and the URL</p>
+            <h3>1. Birth of the Web at CERN</h3>
+            <p><strong>Milestone:</strong> Invention of the Web, and the first website</p>
             <p><strong>Year:</strong> <time datetime="1989">1989</time>&ndash;<time datetime="1991">1991</time></p>
 
             <h4>Event</h4>
-            <p>Tim Berners-Lee, a researcher at CERN, proposed a hypertext-based system for linking documents in March <time datetime="1989-03">1989</time>. By late 1990, with Robert Cailliau, he had built HTML, URLs, and HTTP, plus the first browser/editor and web server. The first website went live on <time datetime="1991-08-06">August 6, 1991</time>.</p>
+            <p>Tim Berners-Lee, a researcher at CERN, wrote &ldquo;Information Management: A Proposal&rdquo; in March <time datetime="1989-03">1989</time>, describing an internet-based hypertext system for linking documents on different computers. With Robert Cailliau he refined it into a formal proposal in November <time datetime="1990-11">1990</time> and, by the end of that year, had built the three building blocks of the Web &mdash; HTML for formatting documents, HTTP for transferring them, and URLs for identifying them &mdash; together with the first browser/editor and web server, which ran on a NeXT computer. The first website went live at info.cern.ch on <time datetime="1991-08-06">August 6, 1991</time>.</p>
 
             <h4>Why it mattered</h4>
-            <p>The web is the application layer that made the internet browsable and usable by non-specialists, turning a network for technical users into a system of interlinked, navigable documents.</p>
+            <p>The Web is the application layer that made the internet browsable and usable by non-specialists, turning a network for technical users into a system of interlinked, navigable documents that could be published by anyone.</p>
 
             <h4>Sources</h4>
             <ol start="1">
-                <li id="ref1">CERN, &ldquo;Web@30: The 30-Year Anniversary of an Invention That Changed the World,&rdquo; <cite>CERN News</cite>, Mar. 4, 2019. [Online]. Available: <a href="https://home.cern/?p=7954">https://home.cern/?p=7954</a>. [Accessed: Sep. 13, 2026].</li>
-                <li id="ref2">Massachusetts Institute of Technology, Lemelson Foundation, &ldquo;Tim Berners-Lee,&rdquo; <cite>MIT Lemelson</cite>. [Online]. Available: <a href="https://lemelson.mit.edu/resources/tim-berners">https://lemelson.mit.edu/resources/tim-berners</a>. [Accessed: Sep. 13, 2026].</li>
-                <li id="ref3">The National Museum of Computing, &ldquo;Tim Berners-Lee,&rdquo; <cite>Computing History</cite>. [Online]. Available: <a href="https://computinghistory.org.uk/det/2489/Tim-Berners-Lee">https://computinghistory.org.uk/det/2489/Tim-Berners-Lee</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref1">CERN, &ldquo;The birth of the Web,&rdquo; <cite>CERN</cite>. [Online]. Available: <a href="https://home.cern/science/computing/the-birth-of-the-web">https://home.cern/science/computing/the-birth-of-the-web</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref2">World Wide Web Consortium, &ldquo;History,&rdquo; <cite>W3C</cite>. [Online]. Available: <a href="https://www.w3.org/about/history/">https://www.w3.org/about/history/</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref3">T. Berners-Lee, &ldquo;The World Wide Web project&rdquo; (1992 copy of the first project pages), <cite>W3C</cite>. [Online]. Available: <a href="https://www.w3.org/History/19921103-hypertext/hypertext/WWW/TheProject.html">https://www.w3.org/History/19921103-hypertext/hypertext/WWW/TheProject.html</a>. [Accessed: Oct. 3, 2026].</li>
             </ol>
         </article>
 
-        <article id="mosaic">
-            <h3>2. Mosaic &mdash; The First Popular Web Browser</h3>
-            <p><strong>Milestone:</strong> Public release of NCSA Mosaic</p>
+        <article id="open-web">
+            <h3>2. A Free, Open Web: the Public-Domain Release and Mosaic</h3>
+            <p><strong>Milestone:</strong> Public-domain release and the NCSA Mosaic browser</p>
             <p><strong>Year:</strong> <time datetime="1993">1993</time></p>
 
             <h4>Event</h4>
-            <p>Released <time datetime="1993-01-23">January 23, 1993</time>, by Marc Andreessen and Eric Bina at the University of Illinois&rsquo;s National Center for Supercomputing Applications (NCSA), Mosaic was the first browser to display images inline with text and was distributed free, with versions for Windows, Macintosh, and Unix.</p>
+            <p>On <time datetime="1993-04-30">April 30, 1993</time>, CERN put the World Wide Web software in the public domain, so that anyone could run a server or write a browser without paying royalties or asking permission. That same year, Marc Andreessen and Eric Bina at the University of Illinois&rsquo;s National Center for Supercomputing Applications (NCSA) released Mosaic, a browser for Windows, Macintosh and Unix that displayed images inline with the text and was distributed free of charge.</p>
 
             <h4>Why it mattered</h4>
-            <p>Mosaic&rsquo;s ease of use is widely credited with turning the web from an academic tool into something ordinary people could use, setting the visual and navigational template for every browser that followed.</p>
+            <p>CERN&rsquo;s royalty-free release is credited with the Web&rsquo;s rapid, unrestricted adoption, and Mosaic&rsquo;s ease of use is widely credited with turning the Web from an academic tool into something ordinary people could use &mdash; it set the visual and navigational template for every browser that followed.</p>
 
             <h4>Sources</h4>
             <ol start="4">
-                <li id="ref4">&ldquo;Mosaic &mdash; The First Global Web Browser,&rdquo; <cite>Living Internet</cite>. [Online]. Available: <a href="https://livinginternet.info/w/wi_mosaic.htm">https://livinginternet.info/w/wi_mosaic.htm</a>. [Accessed: Sep. 13, 2026].</li>
-                <li id="ref5">&ldquo;NCSA Mosaic, the First Real Web Browser, Turns 20,&rdquo; <cite>Fox News</cite>. [Online]. Available: <a href="https://www.foxnews.com/tech/ncsa-mosaic-the-first-real-web-browser-turns-20.amp">https://www.foxnews.com/tech/ncsa-mosaic-the-first-real-web-browser-turns-20.amp</a>. [Accessed: Sep. 13, 2026].</li>
-                <li id="ref6">M. Andreessen, &ldquo;NCSA Mosaic Technical Summary,&rdquo; <cite>Electronic Frontier Foundation Exhibit K</cite>, Feb. 20, 1993. [Online]. Available: <a href="https://w2.eff.org/patent/wanted/neomedia/reexam/ExhibitK_MosaicWebBrowserHistory_NCSA.pdf">https://w2.eff.org/patent/wanted/neomedia/reexam/ExhibitK_MosaicWebBrowserHistory_NCSA.pdf</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref4">CERN, &ldquo;Twenty years of a free, open web,&rdquo; <cite>CERN News</cite>, Apr. 30, 2013. [Online]. Available: <a href="https://home.cern/news/news/computing/twenty-years-free-open-web">https://home.cern/news/news/computing/twenty-years-free-open-web</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref5">Internet Hall of Fame, &ldquo;Marc Andreessen,&rdquo; <cite>Internet Society</cite>. [Online]. Available: <a href="https://www.internethalloffame.org/inductee/marc-andreessen/">https://www.internethalloffame.org/inductee/marc-andreessen/</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref6">Internet Hall of Fame, &ldquo;Eric Bina,&rdquo; <cite>Internet Society</cite>. [Online]. Available: <a href="https://www.internethalloffame.org/inductee/eric-bina/">https://www.internethalloffame.org/inductee/eric-bina/</a>. [Accessed: Oct. 3, 2026].</li>
             </ol>
         </article>
 
-        <article id="google">
-            <h3>3. Google &mdash; Organizing the Web at Scale</h3>
-            <p><strong>Milestone:</strong> Founding of Google Inc.</p>
-            <p><strong>Year:</strong> <time datetime="1998">1998</time></p>
+        <article id="standards">
+            <h3>3. The W3C and the Standardization of the Web</h3>
+            <p><strong>Milestone:</strong> HTML 2.0, CSS1 and HTML 4 make the Web interoperable</p>
+            <p><strong>Year:</strong> <time datetime="1994">1994</time>&ndash;<time datetime="1998">1998</time></p>
 
             <h4>Event</h4>
-            <p>Larry Page and Sergey Brin, Stanford PhD students, developed a search engine (&ldquo;BackRub&rdquo;) that ranked pages by analyzing links pointing to them, rather than keyword frequency alone. They incorporated Google Inc. on <time datetime="1998-09-04">September 4, 1998</time>.</p>
+            <p>In October <time datetime="1994-10">1994</time>, Tim Berners-Lee founded the World Wide Web Consortium (W3C) at MIT, in collaboration with CERN, DARPA and the European Commission, to steer the Web&rsquo;s development so that no single company could control it. The W3C then published specifications that any browser could implement: HTML 2.0 in <time datetime="1995">1995</time>, CSS1 for styling in December <time datetime="1996-12">1996</time>, and HTML 4 in <time datetime="1997">1997</time>.</p>
 
             <h4>Why it mattered</h4>
-            <p>Google&rsquo;s link-based ranking made the rapidly growing web navigable and searchable at scale, becoming the dominant way people found information online and shaping how the web&rsquo;s content economy developed.</p>
+            <p>Shared, royalty-free standards are what let pages written once display correctly in every browser, and they prevented the Web from splitting into incompatible versions owned by competing vendors. That is still how the Web is developed today.</p>
 
             <h4>Sources</h4>
             <ol start="7">
-                <li id="ref7">Encyclopaedia Britannica, &ldquo;Larry Page.&rdquo; [Online]. Available: <a href="https://www.britannica.com/money/Larry-Page">https://www.britannica.com/money/Larry-Page</a>. [Accessed: Sep. 13, 2026].</li>
-                <li id="ref8">&ldquo;A Guide to Google: Origins, History and Key Moments in Search,&rdquo; <cite>Search Engine Land</cite>. [Online]. Available: <a href="https://searchengineland.com/guide/google">https://searchengineland.com/guide/google</a>. [Accessed: Sep. 13, 2026].</li>
-                <li id="ref9">&ldquo;Google Is Incorporated,&rdquo; <cite>Sky HISTORY</cite>. [Online]. Available: <a href="https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated">https://www.history.co.uk/this-day-in-history/04-september/google-is-incorporated</a>. [Accessed: Sep. 13, 2026].</li>
+                <li id="ref7">World Wide Web Consortium, &ldquo;History,&rdquo; <cite>W3C</cite>. [Online]. Available: <a href="https://www.w3.org/about/history/">https://www.w3.org/about/history/</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref8">T. Berners-Lee and D. Connolly, &ldquo;Hypertext Markup Language &mdash; 2.0&rdquo; (HTML 2.0 specification), <cite>W3C</cite>, 1995. [Online]. Available: <a href="https://www.w3.org/MarkUp/html-spec/">https://www.w3.org/MarkUp/html-spec/</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref9">H. W. Lie and B. Bos, &ldquo;Cascading Style Sheets, level 1&rdquo; (CSS1), <cite>W3C Recommendation</cite>, Dec. 1996. [Online]. Available: <a href="https://www.w3.org/TR/CSS1/">https://www.w3.org/TR/CSS1/</a>. [Accessed: Oct. 3, 2026].</li>
+            </ol>
+        </article>
+
+        <article id="dynamic-web">
+            <h3>4. The Dynamic, Scriptable Web</h3>
+            <p><strong>Milestone:</strong> ECMAScript, XML and HTTP/1.1 make pages interactive</p>
+            <p><strong>Year:</strong> <time datetime="1999">1999</time>&ndash;<time datetime="2005">2005</time></p>
+
+            <h4>Event</h4>
+            <p>JavaScript, written at Netscape in <time datetime="1995">1995</time> by Brendan Eich, was standardized as ECMAScript in ECMA-262 in <time datetime="1997">1997</time>, and XML 1.0 became a W3C Recommendation in February <time datetime="1998-02">1998</time>. HTTP/1.1 was published as RFC 2616 in June <time datetime="1999-06">1999</time>. Together with the XMLHttpRequest object, these technologies let a page request new data and update part of itself without reloading &mdash; the technique later called Ajax.</p>
+
+            <h4>Why it mattered</h4>
+            <p>Pages stopped being static documents and became applications that run inside the browser. This is the foundation of every modern web application, from maps and mail clients to the sites and frameworks used today.</p>
+
+            <h4>Sources</h4>
+            <ol start="10">
+                <li id="ref10">Ecma International, &ldquo;ECMA-262: ECMAScript language specification,&rdquo; <cite>Ecma International</cite>. [Online]. Available: <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-262/">https://www.ecma-international.org/publications-and-standards/standards/ecma-262/</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref11">T. Bray, J. Paoli, C. M. Sperberg-McQueen, E. Maler, and F. Yergeau, &ldquo;Extensible Markup Language (XML) 1.0,&rdquo; <cite>W3C Recommendation</cite>, Feb. 1998. [Online]. Available: <a href="https://www.w3.org/TR/xml/">https://www.w3.org/TR/xml/</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref12">R. Fielding, J. Gettys, J. Mogul, H. Frystyk, L. Masinter, P. Leach, and T. Berners-Lee, &ldquo;Hypertext Transfer Protocol &mdash; HTTP/1.1,&rdquo; RFC 2616, Internet Engineering Task Force, Jun. 1999. [Online]. Available: <a href="https://www.rfc-editor.org/rfc/rfc2616.html">https://www.rfc-editor.org/rfc/rfc2616.html</a>. [Accessed: Oct. 3, 2026].</li>
+            </ol>
+        </article>
+
+        <article id="html5">
+            <h3>5. The Mobile Web and HTML5</h3>
+            <p><strong>Milestone:</strong> Responsive browsing and the HTML5 Recommendation</p>
+            <p><strong>Year:</strong> <time datetime="2007">2007</time>&ndash;<time datetime="2014">2014</time></p>
+
+            <h4>Event</h4>
+            <p>As smartphones and tablets spread through the 2000s and 2010s, browsing moved from desktop computers to small touch screens, and sites switched to responsive layouts that adapt to any screen size. In parallel, the W3C worked on a new version of the language: HTML5 became a W3C Recommendation on <time datetime="2014-10-28">October 28, 2014</time>, adding native audio and video playback without plugins, the canvas element for drawing and animation, native support for SVG and MathML, and better accessibility features.</p>
+
+            <h4>Why it mattered</h4>
+            <p>HTML5 brought to the browser what previously required separate plug-ins, and the mobile Web made the Web the first place most people now go online. Together they turned the Web from a collection of pages into the platform that applications are delivered on.</p>
+
+            <h4>Sources</h4>
+            <ol start="13">
+                <li id="ref13">World Wide Web Consortium, &ldquo;Open Web Platform Milestone Achieved with HTML5 Recommendation,&rdquo; <cite>W3C Press Release</cite>, Oct. 28, 2014. [Online]. Available: <a href="https://www.w3.org/press-releases/2014/html5-rec/">https://www.w3.org/press-releases/2014/html5-rec/</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref14">I. Hickson, R. Berjon, S. Faulkner, T. Leithead, E. D. Navara, E. O&rsquo;Connor, and S. Pfeiffer, &ldquo;HTML5: A vocabulary and associated APIs for HTML and XHTML,&rdquo; <cite>W3C Recommendation</cite>, Oct. 28, 2014. [Online]. Available: <a href="https://www.w3.org/TR/2014/REC-html5-20141028/">https://www.w3.org/TR/2014/REC-html5-20141028/</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref15">World Wide Web Consortium, &ldquo;History,&rdquo; <cite>W3C</cite>. [Online]. Available: <a href="https://www.w3.org/about/history/">https://www.w3.org/about/history/</a>. [Accessed: Oct. 3, 2026].</li>
+            </ol>
+        </article>
+
+        <article id="modern-web">
+            <h3>6. Today&rsquo;s Web</h3>
+            <p><strong>Milestone:</strong> HTTP/2 and HTTP/3, and WebAssembly</p>
+            <p><strong>Year:</strong> <time datetime="2014">2014</time>&ndash;<time datetime="2026">2026</time></p>
+
+            <h4>Event</h4>
+            <p>The way pages travel is being rebuilt for today&rsquo;s traffic: HTTP/2 (RFC 7540, May <time datetime="2015-05">2015</time>) and HTTP/3 (RFC 9114, June <time datetime="2022-06">2022</time>) replaced much of HTTP/1.1&rsquo;s behaviour and moved delivery onto faster, encrypted transports. In December <time datetime="2019-12">2019</time>, WebAssembly became a W3C Recommendation, allowing code compiled from other languages to run in the browser at near-native speed.</p>
+
+            <h4>Why it mattered</h4>
+            <p>These changes made the Web fast and capable enough to host software that used to require an installed application, and the standards process behind them keeps the Web open to any browser and any user rather than tied to one vendor.</p>
+
+            <h4>Sources</h4>
+            <ol start="16">
+                <li id="ref16">M. Belshe, R. Peon, and M. Thomson, &ldquo;Hypertext Transfer Protocol Version 2 (HTTP/2),&rdquo; RFC 7540, Internet Engineering Task Force, May 2015. [Online]. Available: <a href="https://www.rfc-editor.org/rfc/rfc7540.html">https://www.rfc-editor.org/rfc/rfc7540.html</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref17">M. Bishop, &ldquo;HTTP/3,&rdquo; RFC 9114, Internet Engineering Task Force, Jun. 2022. [Online]. Available: <a href="https://www.rfc-editor.org/rfc/rfc9114.html">https://www.rfc-editor.org/rfc/rfc9114.html</a>. [Accessed: Oct. 3, 2026].</li>
+                <li id="ref18">A. Rossberg, &ldquo;WebAssembly Core Specification,&rdquo; <cite>W3C Recommendation</cite>, Dec. 5, 2019. [Online]. Available: <a href="https://www.w3.org/TR/2019/REC-wasm-core-1-20191205/">https://www.w3.org/TR/2019/REC-wasm-core-1-20191205/</a>. [Accessed: Oct. 3, 2026].</li>
             </ol>
         </article>
 

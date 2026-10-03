@@ -2,10 +2,13 @@
 {% set page_title = "Internet History" %}
 
 {% block nav %}
-<nav>
+<nav aria-label="On this page">
+    <a href="#arpanet">ARPANET</a>
     <a href="#tcpip">TCP/IP</a>
     <a href="#dns">DNS</a>
-    <a href="#www">World Wide Web</a>
+    <a href="#nsfnet">NSFNET</a>
+    <a href="#governance">Governance &amp; IPv6</a>
+    <a href="#today">The Internet Today</a>
 </nav>
 {% endblock %}
 
@@ -13,50 +16,96 @@
 <main>
     <section>
         <article>
-            <h3>
+            <h2>
                 Introduction: the History of the Internet
-            </h3>
+            </h2>
             <p>
-                The internet is a large system of connected computer networks around the world and
-                owned by different people, which allows them to share data to each others. It all
-                began in October 1969 as ARPANET which is a project funded by the US department
-                of Defense. It was the first network that worked at the time by breaking the data
-                into small chunks and sending it. Afterwards, we see multiple milestones achieved
-                from this very first step to the internet world, such as sending the first email
-                in 1971, ethernet invention in 1973, and so on. We will take a look at three key
-                technologies which are TCP/IP in 1983, DNS in 1983-1984, and the World Wide Web
-                (www) / HTTP and HTML from 1989 till 1991.
+                The internet is a large system of connected computer networks that are spread around the world.
+                The computers do not belong to a single entity, but are owned by different people which allows
+                them to share data with each other. It grew out of research on packet switching in the 1960s
+                and became a working network as ARPANET in 1969, and then kept expanding through new protocols,
+                bigger backbones and global coordination until it reached billions of people today.
             </p>
         </article>
     </section>
-    <section id="tcpip">
+    <section id="arpanet">
         <article>
-            <h3>
-                1. TCP/IP: The "Flag Day" protocol transition
-            </h3>
+            <h2>
+                1. Packet Switching and ARPANET
+            </h2>
             <p>
-                Event: On January 1, 1983, every host on ARPANET was required to switch from the older Network Control Protocol (NCP) to TCP/IP, developed by Vinton Cerf and Robert Kahn. TCP/IP split communication into a reliable transmission layer and a simpler routing layer, allowing data to move between dissimilar, independently operated networks.
+                Event: In the early 1960s, Paul Baran at the RAND Corporation and Donald Davies at the
+                UK National Physical Laboratory independently developed packet switching &mdash; breaking
+                data into small blocks that are routed independently and reassembled at the destination
+                &mdash; while Leonard Kleinrock's research at MIT provided its mathematical basis. The US
+                Advanced Research Projects Agency (ARPA) then funded the ARPANET: the first Interface
+                Message Processor (IMP) was installed at UCLA in September 1969, the first host-to-host
+                message was sent from UCLA to the Stanford Research Institute on October 29, 1969, and by
+                the end of 1969 four nodes were connected at UCLA, SRI, UC Santa Barbara and the
+                University of Utah.
             </p>
             <p>
-                Why it mattered: This gave the internet its defining architecture — a "network of networks" that lets any TCP/IP-compliant system exchange data with any other, regardless of the underlying hardware. It remains the core protocol suite of the internet today.
+                Why it mattered: ARPANET was the first working packet-switched network and set the model
+                the internet still uses today &mdash; many independent computers linked into one network
+                that shares data without depending on a single central controller.
             </p>
             <p>
                 Sources:
             </p>
             <ul>
                 <li>
-                    <a href="https://www.icann.org/en/blogs/details/the-first-message-transmission-29-10-2019-en">
-                        V. Cerf, "The First Message Transmission," ICANN Blog, Oct. 29, 2019.
+                    <a href="https://www.internetsociety.org/internet/history-internet/brief-history-internet/">
+                        B. M. Leiner, V. G. Cerf, D. D. Clark, R. E. Kahn, L. Kleinrock, D. C. Lynch, J. Postel, L. G. Roberts, and S. Wolff, "A Brief History of the Internet," Internet Society.
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.tribuneindia.com/news/anniversary/birth-of-the-internet-a-historic-development-in-communications">
-                        "Birth of the Internet: A Historic Development in Communications," The Tribune.
+                    <a href="https://www.internethalloffame.org/internet-history/timeline">
+                        Internet Hall of Fame, "Internet History Timeline," Internet Society.
                     </a>
                 </li>
                 <li>
-                    <a href="https://elists.isoc.org/pipermail/internet-history/2023-August/008773.html">
-                        Internet History Mailing List, "Memories of Flag Day?," Internet Society Archives, Aug. 2023.
+                    <a href="https://www.nsf.gov/about/history/nifty50/theinternet.jsp">
+                        National Science Foundation, "The Internet," NSF: Nifty 50.
+                    </a>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="tcpip">
+        <article>
+            <h2>
+                2. TCP/IP: The "Flag Day" Protocol Transition
+            </h2>
+            <p>
+                Event: Vinton Cerf and Robert Kahn published "A Protocol for Packet Network
+                Intercommunication" in 1974, and the first specification of TCP appeared as RFC 675 in
+                December 1974. The suite was later split into the Internet Protocol (RFC 791) and the
+                Transmission Control Protocol (RFC 793), both published in September 1981. On January 1,
+                1983 &mdash; the "flag day" &mdash; every host on ARPANET was required to stop using the
+                older Network Control Protocol (NCP) and switch to TCP/IP.
+            </p>
+            <p>
+                Why it mattered: This gave the internet its defining architecture &mdash; a "network of
+                networks" that lets any TCP/IP-compliant system exchange data with any other, regardless
+                of the underlying hardware. It remains the core protocol suite of the internet today.
+            </p>
+            <p>
+                Sources:
+            </p>
+            <ul>
+                <li>
+                    <a href="https://www.rfc-editor.org/rfc/rfc675.html">
+                        V. Cerf, Y. Dalal, and C. Sunshine, "Specification of Internet Transmission Control Program," RFC 675, Internet Engineering Task Force, Dec. 1974.
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.rfc-editor.org/rfc/rfc791.html">
+                        J. Postel, "Internet Protocol," RFC 791, Internet Engineering Task Force, Sep. 1981.
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.rfc-editor.org/rfc/rfc793.html">
+                        J. Postel, "Transmission Control Protocol," RFC 793, Internet Engineering Task Force, Sep. 1981.
                     </a>
                 </li>
             </ul>
@@ -64,78 +113,164 @@
     </section>
     <section id="dns">
         <article>
-            <h3>
-                2. DNS: Introduction of a Distributed Naming Architecture
-            </h3>
+            <h2>
+                3. DNS: Introduction of a Distributed Naming Architecture
+            </h2>
             <p>
-                Event: Paul Mockapetris, at USC's Information Sciences Institute, published RFC 882
-                and RFC 883 in 1983, proposing a hierarchical, distributed system to replace the
+                Event: Paul Mockapetris, at USC's Information Sciences Institute, published RFC 882 and
+                RFC 883 in November 1983, proposing a hierarchical, distributed system to replace the
                 single manually-maintained hosts.txt file used to map computer names to numeric
-                addresses. He built the first working name server, "Jeeves," in 1983–84; the system
-                was formally standardized in RFCs 1034 and 1035 in 1987.
+                addresses. He built the first working name server, "Jeeves," in 1983&ndash;84, and the
+                system was formally standardized in RFCs 1034 and 1035 in November 1987.
             </p>
             <p>
-                Why it mattered: DNS let people use memorable names instead of numeric IP addresses
-                and distributed the job of managing those names across many servers instead of one
-                central authority — a design that scaled with the internet's growth and remains
-                its core naming infrastructure.
+                Why it mattered: DNS let people use memorable names instead of numeric IP addresses and
+                distributed the job of managing those names across many servers instead of one central
+                authority &mdash; a design that scaled with the internet's growth and remains its core
+                naming infrastructure.
             </p>
             <p>
                 Sources:
             </p>
             <ul>
                 <li>
-                    <a href="https://awards.acm.org/award-recipients/mockapetris_3342151">
-                        Association for Computing Machinery, "Paul Mockapetris — ACM Software System Award Citation," ACM Awards, 2019.
+                    <a href="https://www.rfc-editor.org/rfc/rfc1034.html">
+                        P. Mockapetris, "Domain Names &mdash; Concepts and Facilities," RFC 1034, Internet Engineering Task Force, Nov. 1987.
                     </a>
                 </li>
                 <li>
-                    <a href="https://bind9.readthedocs.io/en/latest/history.html">
-                        Internet Systems Consortium, "A Brief History of the DNS and BIND," ISC Documentation.
+                    <a href="https://www.rfc-editor.org/rfc/rfc1035.html">
+                        P. Mockapetris, "Domain Names &mdash; Implementation and Specification," RFC 1035, Internet Engineering Task Force, Nov. 1987.
                     </a>
                 </li>
                 <li>
-                    <a href="https://www.dnib.com/timeline/data-domain-names-timeline">
-                        "Data & Domain Names Timeline," DNIB.com — Domain Name Industry Brief.
+                    <a href="https://www.internethalloffame.org/inductee/paul-mockapetris/">
+                        Internet Hall of Fame, "Paul Mockapetris," Internet Society.
                     </a>
                 </li>
             </ul>
         </article>
     </section>
-    <section id="www">
+    <section id="nsfnet">
         <article>
-            <h3>
-                3. World Wide Web: Invention of the Web at CERN
-            </h3>
+            <h2>
+                4. NSFNET and the Commercialization of the Internet
+            </h2>
             <p>
-                Event: Tim Berners-Lee, a researcher at CERN, proposed a hypertext-based system
-                for linking documents across computers in March 1989. By late 1990, with Robert
-                Cailliau, he had built HTML, URLs, and HTTP, along with the first browser/editor
-                and web server. The first website went live on August 6, 1991, and CERN released
-                the software into the public domain in 1993.
+                Event: To give researchers outside ARPANET access to shared computing, the National
+                Science Foundation funded NSFNET, whose backbone came online in 1986 and connected
+                regional networks and supercomputer centres. It was upgraded to T1 in 1988 and T3 in
+                1991, and it became the de facto US internet backbone, growing from about 2,000 connected
+                computers in 1986 to more than two million by 1993. Once private carriers had built their
+                own infrastructure, NSF decommissioned the NSFNET backbone on April 30, 1995 and the
+                internet passed into commercial operation.
             </p>
             <p>
-                Why it mattered: The web is the application layer that made the internet browsable
-                and usable by non-specialists rather than a tool limited to technical users, and
-                CERN's royalty-free release was central to its rapid, unrestricted global adoption.
+                Why it mattered: NSFNET opened the network to the whole academic community and proved it
+                could run at national scale. Handing it over to commercial carriers turned the internet
+                from a publicly funded research project into the infrastructure that businesses and the
+                public could buy access to, which is what made its rapid growth possible.
             </p>
             <p>
                 Sources:
             </p>
             <ul>
                 <li>
-                    <a href="https://home.cern/?p=7954">
-                        CERN, "Web@30: The 30-Year Anniversary of an Invention That Changed the World," CERN News, Mar. 4, 2019.
+                    <a href="https://www.nsf.gov/about/history/nifty50/theinternet.jsp">
+                        National Science Foundation, "The Internet," NSF: Nifty 50.
                     </a>
                 </li>
                 <li>
-                    <a href="https://lemelson.mit.edu/resources/tim-berners">
-                        Massachusetts Institute of Technology, Lemelson Foundation, "Tim Berners-Lee," MIT Lemelson.
+                    <a href="https://www.nsf.gov/impacts/internet">
+                        National Science Foundation, "Birth of the Commercial Internet," NSF Impacts.
                     </a>
                 </li>
                 <li>
-                    <a href="https://computinghistory.org.uk/det/2489/Tim-Berners-Lee">
-                        The National Museum of Computing, "Tim Berners-Lee," Computing History.
+                    <a href="https://www.internetsociety.org/internet/history-internet/brief-history-internet/">
+                        Internet Society, "A Brief History of the Internet."
+                    </a>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="governance">
+        <article>
+            <h2>
+                5. Global Governance and IPv6
+            </h2>
+            <p>
+                Event: As the network became worldwide, its coordination moved from US-funded projects to
+                global, community-run bodies: the Internet Society was formed in 1992 to support the
+                standards work of the IETF, and in November 1998 the US Department of Commerce recognized
+                ICANN, a private non-profit corporation, to coordinate the internet's names and numbers.
+                Growth also exposed the limits of the IPv4 address space, so a new version of the
+                protocol, IPv6, was specified in RFC 1883 in December 1995 and finally published as an
+                Internet Standard in RFC 8200 in July 2017.
+            </p>
+            <p>
+                Why it mattered: Internet governance became a shared, international responsibility rather
+                than a single government's project, and IPv6 removed the long-term ceiling on how many
+                devices the internet could address &mdash; a requirement for the mobile and connected
+                devices that followed.
+            </p>
+            <p>
+                Sources:
+            </p>
+            <ul>
+                <li>
+                    <a href="https://www.internetsociety.org/history/">
+                        Internet Society, "Our History."
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.icann.org/resources/pages/history-2012-02-25-en">
+                        ICANN, "A Brief History of ICANN."
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.rfc-editor.org/rfc/rfc8200.html">
+                        S. Deering and R. Hinden, "Internet Protocol, Version 6 (IPv6) Specification," RFC 8200, Internet Engineering Task Force, Jul. 2017.
+                    </a>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <section id="today">
+        <article>
+            <h2>
+                6. The Internet Today
+            </h2>
+            <p>
+                Event: On October 1, 2016, the stewardship of the IANA functions passed from the US
+                government to the global internet community, completing the move to multistakeholder
+                governance of the internet's addressing and naming systems. In its Facts and Figures 2024
+                report, the International Telecommunication Union estimated that 5.5 billion people
+                &mdash; 68 per cent of the world's population &mdash; were using the internet, with 5G
+                mobile networks covering about half of the world's population.
+            </p>
+            <p>
+                Why it mattered: The internet is now critical infrastructure used by most of humanity, not
+                a research network for a few institutions. The 2016 transition, and the addressing and
+                mobile technology behind today's scale, are what allow the network to keep growing without
+                depending on any single country or organisation.
+            </p>
+            <p>
+                Sources:
+            </p>
+            <ul>
+                <li>
+                    <a href="https://www.icann.org/stewardship-accountability">
+                        ICANN, "Stewardship and Accountability."
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.itu.int/en/mediacentre/Pages/PR-2024-11-27-facts-and-figures.aspx">
+                        International Telecommunication Union, "Connectivity and 5G coverage increase worldwide; one-third of population remains offline, mainly in rural areas," ITU Facts and Figures 2024, Nov. 27, 2024.
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.internetsociety.org/internet/history-internet/brief-history-internet/">
+                        Internet Society, "A Brief History of the Internet."
                     </a>
                 </li>
             </ul>

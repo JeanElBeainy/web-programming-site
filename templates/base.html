@@ -37,6 +37,13 @@
     {% block footer %}
     <footer>
         <p>Web Programming — built with Flask and deployed on Render.</p>
+        {% block footer_statement %}
+        <p>
+            This website is created for educational purposes
+            only, as part of the GIN446 - Web Programming course,
+            School of Engineering, USEK. (Fall 2026-2027)
+        </p>
+        {% endblock %}
     </footer>
     {% endblock %}
 </body>

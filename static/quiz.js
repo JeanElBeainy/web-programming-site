@@ -28,10 +28,10 @@ const questions = [
     explanation: "A page can hold any number of scripts, in the head, in the body, or in both.",
   },
   {
-    question: "Which keyword declares a variable that can be reassigned?",
+    question: "Which keyword declares a variable whose value cannot be reassigned?",
     choices: ["var", "let", "const", "static"],
-    answer: 1,
-    explanation: "let declares a variable whose value can change later. const cannot be reassigned.",
+    answer: 2,
+    explanation: "const declares a variable that cannot be reassigned, while let and var can still change.",
   },
   {
     question: "Which data type is used for a series of characters written between quotes?",

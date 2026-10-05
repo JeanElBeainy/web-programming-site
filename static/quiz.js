@@ -154,11 +154,11 @@ function calculatePercentage(score) {
 // ======================================================
 function getPerformanceMessage(percentage) {
   //   Return a performance message based on the percentage score.
-  if (percentage >= 80)
+  if (percentage >= 90)
     return "Excellent";
-  else if (percentage >= 60)
+  else if (percentage >= 70)
     return "Good";
-  else if (percentage >= 50)
+  else if (percentage >= 60)
     return "Pass";
   else
     return "Needs improvement";

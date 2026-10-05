@@ -161,7 +161,7 @@ function getPerformanceMessage(percentage) {
   else if (percentage >= 60)
     return "Pass";
   else
-    return "Needs improvement";
+    return "Fail";
 }
 
 // ======================================================

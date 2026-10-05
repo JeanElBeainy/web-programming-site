@@ -1,0 +1,166 @@
+/* ==========================================================================
+   Web Programming Portfolio — quiz.css
+   The JavaScript quiz's own layer. Loaded by quiz.html only, and loaded AFTER
+   style.css, so it builds on the site instead of replacing it: every rule
+   below uses the tokens in style.css's :root, so the quiz is the same paper
+   and ink as the rest of the site, and it follows along if that palette
+   changes.
+
+   The page structure comes from quiz.html and the questions come from the
+   JavaScript in quiz.js; this file only decides how the quiz looks.
+
+   MOBILE-FIRST, like the site stylesheet: every rule here is the phone
+   layout, and none of it needs a media query, because the answer cards are
+   full width and the navigation buttons wrap on their own.
+
+   Markup this targets:
+     #quizPanel               the questions, answers and buttons
+     #progress                "Question 1 of 17" — a small mono label
+     #questionText            the question itself
+     #choices                 holds the labels the script builds
+     label.choice             one answer: a radio plus its text
+     .navigation              the four move-around buttons
+     .submit                  the accent-filled submit button
+     #resultsPanel            hidden until the quiz is submitted
+   ========================================================================== */
+
+/* ==========================================================================
+   1. Question and answers
+   ========================================================================== */
+
+/* The quiz's position in the run, not part of the question — so it wears the
+   same small mono label as the form's numbered steps and the table headers. */
+#progress {
+  margin-block-end: var(--sp-1);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* The site's h3 is a section heading; here it is the question, so it gets a
+   little more size and sits right under the progress line. */
+#questionText {
+  margin-block: 0 var(--sp-2);
+  font-size: 1.25rem;
+}
+
+#choices {
+  margin-block: var(--sp-2);
+}
+
+/* One answer is one card, the same shape as a card in the weekly-work list.
+   The radio sits inside the label, so the whole card is the click target. */
+.choice {
+  display: block;
+  margin-block: var(--sp-1);
+  padding: var(--sp-2);
+  background: var(--bg);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+.choice:hover {
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+/* The dot takes the site green, like the form's radio and checkbox controls. */
+.choice input {
+  margin-inline-end: var(--sp-1);
+  accent-color: var(--accent);
+}
+
+/* ==========================================================================
+   2. Buttons
+   ========================================================================== */
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-2);
+  margin-block-start: var(--sp-3);
+}
+
+/* A button is the button-shaped twin of a nav chip: mono label, hairline
+   border, accent on hover — the same shape the form's buttons use. */
+button {
+  padding: 10px 18px;
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--bg);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+button:hover:not(:disabled) {
+  color: var(--accent);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+/* First/Previous are dead on the first question, Next/Last on the last one. */
+button:disabled {
+  color: var(--muted);
+  background: var(--surface);
+  border-color: var(--border);
+  cursor: not-allowed;
+}
+
+/* Submitting is the one action that finishes the quiz, so it carries the
+   accent fill, like the profile form's submit button. */
+.submit {
+  margin-block-start: var(--sp-3);
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.submit:hover:not(:disabled) {
+  color: var(--on-accent);
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+/* ==========================================================================
+   3. Results
+   ========================================================================== */
+
+/* Hidden at first; the script reveals it when the quiz is submitted. */
+#resultsPanel {
+  display: none;
+}
+
+/* The score is the headline of the results, so it steps up in size. */
+#scoreText {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* The verdict: Excellent, Good, Pass or Needs improvement. */
+#performanceText {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+/* The correction is a long block of prose, so it keeps the site's `pre` panel
+   (surface fill, hairline border) but swaps the mono face back to the body
+   font: a report reads better than it is set as code. */
+#correction {
+  white-space: pre-wrap;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: var(--lh-body);
+}

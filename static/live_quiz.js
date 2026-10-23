@@ -3,83 +3,8 @@
 // ======================================================
 // Each question object holds the question text, the possible answers,
 // the index of the correct answer and a short explanation.
-const questions = [
-  {
-    question: "What is JavaScript mainly used for?",
-    choices: [
-      "To style HTML pages",
-      "To make HTML pages dynamic and interactive",
-      "To store data in a database",
-      "To design images",
-    ],
-    answer: 1,
-    explanation: "JavaScript runs in the browser and makes HTML pages more dynamic and interactive.",
-  },
-  {
-    question: "Which HTML tag is used to insert JavaScript code in a page?",
-    choices: ["<jscript>", "<script>", "<js>", "<javascript>"],
-    answer: 1,
-    explanation: "JavaScript code goes inside <script> tags, in the head, in the body, or in an external file.",
-  },
-  {
-    question: "Which part of an HTML page can hold a script?",
-    choices: ["Only the head", "Only the body", "The head and the body", "Only an external file"],
-    answer: 2,
-    explanation: "A page can hold any number of scripts, in the head, in the body, or in both.",
-  },
-  {
-    question: "Which keyword declares a variable whose value cannot be reassigned?",
-    choices: ["var", "let", "const", "static"],
-    answer: 2,
-    explanation: "const declares a variable that cannot be reassigned, while let and var can still change.",
-  },
-  {
-    question: "Which data type is used for a series of characters written between quotes?",
-    choices: ["string", "number", "boolean", "bigInt"],
-    answer: 0,
-    explanation: "A string is a series of characters written with single or double quotes, for example 'GIN446'.",
-  },
-  {
-    question: "What does the typeof operator return?",
-    choices: [
-      "The value of a variable",
-      "The type of a value",
-      "The name of a variable",
-      "The number of characters",
-    ],
-    answer: 1,
-    explanation: 'typeof returns the type of a value, for example "number", "string" or "boolean".',
-  },
-  {
-    question: "Which operator compares both the value and the type?",
-    choices: ["=", "==", "===", "!="],
-    answer: 2,
-    explanation: '=== is the strict comparison: 5 === "5" is false, while 5 == "5" is true.',
-  },
-  {
-    question: "Which syntax creates an array with three elements?",
-    choices: [
-      'const cars = ("A", "B", "C");',
-      'const cars = ["A", "B", "C"];',
-      'const cars = {"A", "B", "C"};',
-      'const cars = array("A", "B", "C");',
-    ],
-    answer: 1,
-    explanation: 'An array is written with square brackets and commas: const cars = ["A", "B", "C"];',
-  },
-  {
-    question: "Which array method adds a new element at the end of an array?",
-    choices: ["push()", "pop()", "shift()", "join()"],
-    answer: 0,
-    explanation: "push() adds an element at the end of the array, while pop() removes the last element.",
-  },
-  {
-    question: "Which keyword is used to define a function?",
-    choices: ["def", "func", "function", "fun"],
-    answer: 2,
-    explanation: "A function is defined with the function keyword, a name, parentheses and a block of code.",
-  },
-];
+let total = 0; // how many questions (from the server)
+const cache = {}; // cache[i] = a fetched question object
 
 // ======================================================
 // APPLICATION STATE

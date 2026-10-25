@@ -38,7 +38,7 @@ function saveAnswer(choiceIndex) {
 // ======================================================
 function goNext() {
   //   Move to the next question if not at the last question.
-  if (currentQuestion < questions.length - 1)
+  if (currentQuestion < total - 1)
     currentQuestion++;
 
   renderQuestion();
@@ -60,7 +60,7 @@ function goFirst() {
 }
 function goLast() {
   //   Move to the last question.
-  currentQuestion = questions.length - 1;
+  currentQuestion = total - 1;
 
   renderQuestion();
 }
@@ -72,9 +72,11 @@ function calculateScore() {
   //   Calculate the user's score based on their answers.
   let score = 0;
 
-  for (let i = 0; i < questions.length; i++)
-    if (userAnswers[i] === questions[i].answer)
+  for (let i = 0; i < total; i++) {
+    const q = await getQuestion(i);
+    if (userAnswers[i] === q.answer)
       score++;
+  }
 
   return score;
 }
@@ -84,7 +86,7 @@ function calculateScore() {
 // ======================================================
 function calculatePercentage(score) {
   //   Calculate the percentage score based on the total number of questions.
-  return Math.round((score / questions.length) * 100);
+  return Math.round((score / total) * 100);
 }
 
 // ======================================================
@@ -110,23 +112,24 @@ function buildCorrection() {
 
   //   Build a correction string that includes the question, the user's answer,
   //   the correct answer, and an explanation for each question.
-  for (let i = 0; i < questions.length; i++) {
+  for (let i = 0; i < total; i++) {
+    const q = await getQuestion(i);
     const userChoice = userAnswers[i];
-    const correctChoice = questions[i].answer;
-    
+    const correctChoice = q.answer;
+
     let userText = "Not Answered";
     if (userChoice !== undefined)
-      userText = questions[i].choices[userChoice];
+      userText = q.choices[userChoice];
 
     let result = "Incorrect";
     if (userChoice === correctChoice)
       result = "Correct";
 
-    correction += `Question ${i + 1}: ${questions[i].question}\n`;
+    correction += `Question ${i + 1}: ${q.question}\n`;
     correction += `Your answer: ${userText}\n`;
-    correction += `Correct answer: ${questions[i].choices[correctChoice]}\n`;
+    correction += `Correct answer: ${q.choices[correctChoice]}\n`;
     correction += `Result: ${result}\n`;
-    correction += `Explanation: ${questions[i].explanation}\n\n`;
+    correction += `Explanation: ${q.explanation}\n\n`;
   }
 
   return correction;
@@ -150,13 +153,13 @@ function submitQuiz() {
 }
 
 function renderQuestion() {
-  const q = questions[currentQuestion];
+  const q = await getQuestion(currentQuestion);
 
   // --------------------------------------------------
   // QUESTION NUMBER
   // --------------------------------------------------
   document.getElementById("progress").textContent =
-    `Question ${currentQuestion + 1} of ${questions.length}`;
+    `Question ${currentQuestion + 1} of ${total}`;
 
   // --------------------------------------------------
   // QUESTION
@@ -196,9 +199,9 @@ function renderQuestion() {
   document.getElementById("firstBtn").disabled = currentQuestion === 0;
   document.getElementById("previousBtn").disabled = currentQuestion === 0;
   document.getElementById("nextBtn").disabled =
-    currentQuestion === questions.length - 1;
+    currentQuestion === total - 1;
   document.getElementById("lastBtn").disabled =
-    currentQuestion === questions.length - 1;
+    currentQuestion === total - 1;
 }
 
 // ======================================================
@@ -208,7 +211,7 @@ function showResults(score, percentage, message, correction) {
   document.getElementById("quizPanel").style.display = "none";
   document.getElementById("resultsPanel").style.display = "block";
   document.getElementById("scoreText").textContent =
-    `Score: ${score} / ${questions.length}`;
+``    `Score: ${score} / ${total}`;
   document.getElementById("percentageText").textContent =
     `Percentage: ${percentage}%`;
   document.getElementById("performanceText").textContent = message;

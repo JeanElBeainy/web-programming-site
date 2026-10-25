@@ -23,7 +23,7 @@ async function getQuestion(index) {
 // APPLICATION STATE
 // ======================================================
 let currentQuestion = 0;
-const userAnswers = new Array(questions.length);
+const userAnswers = []; // the length isn't known until you fetch the count
 
 // ======================================================
 // SAVE AN ANSWER

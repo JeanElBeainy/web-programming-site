@@ -68,7 +68,7 @@ function goLast() {
 // ======================================================
 // CALCULATE SCORE
 // ======================================================
-function calculateScore() {
+async function calculateScore() {
   //   Calculate the user's score based on their answers.
   let score = 0;
 
@@ -107,7 +107,7 @@ function getPerformanceMessage(percentage) {
 // ======================================================
 // BUILD CORRECTION
 // ======================================================
-function buildCorrection() {
+async function buildCorrection() {
   let correction = "";
 
   //   Build a correction string that includes the question, the user's answer,
@@ -144,7 +144,7 @@ function buildCorrection() {
 // ======================================================
 // SUBMIT QUIZ
 // ======================================================
-function submitQuiz() {
+async function submitQuiz() {
   const score = calculateScore();
   const percentage = calculatePercentage(score);
   const message = getPerformanceMessage(percentage);
@@ -152,7 +152,7 @@ function submitQuiz() {
   showResults(score, percentage, message, correction);
 }
 
-function renderQuestion() {
+async function renderQuestion() {
   const q = await getQuestion(currentQuestion);
 
   // --------------------------------------------------

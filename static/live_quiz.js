@@ -145,10 +145,10 @@ async function buildCorrection() {
 // SUBMIT QUIZ
 // ======================================================
 async function submitQuiz() {
-  const score = calculateScore();
+  const score = await calculateScore();
   const percentage = calculatePercentage(score);
   const message = getPerformanceMessage(percentage);
-  const correction = buildCorrection();
+  const correction = await buildCorrection();
   showResults(score, percentage, message, correction);
 }
 

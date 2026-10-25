@@ -6,6 +6,19 @@
 let total = 0; // how many questions (from the server)
 const cache = {}; // cache[i] = a fetched question object
 
+async function getQuestion(index) {
+  if (cache[index] !== undefined)
+    return cache[index];
+
+  const response = await fetch(`/api/question/${index}`);
+  if (!response.ok)
+    throw new Error("HTTP " + response.status);
+
+  const data = await response.json();
+  cache[index] = data;
+  return data;
+}
+
 // ======================================================
 // APPLICATION STATE
 // ======================================================

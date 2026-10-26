@@ -153,55 +153,48 @@ async function submitQuiz() {
 }
 
 async function renderQuestion() {
-  const q = await getQuestion(currentQuestion);
+  const loading = document.getElementById("loading");
+  const error = document.getElementById("error");
 
-  // --------------------------------------------------
-  // QUESTION NUMBER
-  // --------------------------------------------------
-  document.getElementById("progress").textContent =
-    `Question ${currentQuestion + 1} of ${total}`;
+  loading.hidden = false;
+  error.hidden = true;
 
-  // --------------------------------------------------
-  // QUESTION
-  // --------------------------------------------------
-  document.getElementById("questionText").textContent = q.question;
+  try {
+    const q = await getQuestion(currentQuestion);
+    document.getElementById("progress").textContent = `Question ${currentQuestion + 1} of ${total}`;
+    document.getElementById("questionText").textContent = q.question;
 
-  // --------------------------------------------------
-  // CHOICES
-  // --------------------------------------------------
-  const choicesContainer = document.getElementById("choices");
-  choicesContainer.innerHTML = "";
-  for (let i = 0; i < q.choices.length; i++) {
-    const label = document.createElement("label");
-    label.className = "choice";
-    const radio = document.createElement("input");
-    radio.type = "radio";
-    radio.name = "answer";
-    radio.value = i;
-    // Restore an answer previously selected
-    // by the user.
-    if (userAnswers[currentQuestion] === i) {
-      radio.checked = true;
+    const choicesContainer = document.getElementById("choices");
+    choicesContainer.innerHTML = "";
+    for (let i = 0; i < q.choices.length; i++) {
+      const label = document.createElement("label");
+      label.className = "choice";
+      const radio = document.createElement("input");
+      radio.type = "radio";
+      radio.name = "answer";
+      radio.value = i;
+
+      if (userAnswers[currentQuestion] === i)
+        radio.checked = true;
+
+      radio.onclick = function () {
+        saveAnswer(i);
+      };
+      label.appendChild(radio);
+      label.appendChild(document.createTextNode(" " + q.choices[i]));
+      choicesContainer.appendChild(label);
     }
-    // When the user selects this answer,
-    // save its index.
-    radio.onclick = function () {
-      saveAnswer(i);
-    };
-    label.appendChild(radio);
-    label.appendChild(document.createTextNode(" " + q.choices[i]));
-    choicesContainer.appendChild(label);
-  }
 
-  // --------------------------------------------------
-  // NAVIGATION BUTTONS
-  // --------------------------------------------------
-  document.getElementById("firstBtn").disabled = currentQuestion === 0;
-  document.getElementById("previousBtn").disabled = currentQuestion === 0;
-  document.getElementById("nextBtn").disabled =
-    currentQuestion === total - 1;
-  document.getElementById("lastBtn").disabled =
-    currentQuestion === total - 1;
+    document.getElementById("firstBtn").disabled = currentQuestion === 0;
+    document.getElementById("previousBtn").disabled = currentQuestion === 0;
+    document.getElementById("nextBtn").disabled = currentQuestion === total - 1;
+    document.getElementById("lastBtn").disabled = currentQuestion === total - 1;
+  } catch (err) {
+    error.textContent = "Could not load the question: " + err.message;
+    error.hidden = false;
+  } finally {
+    loading.hidden = true;
+  }
 }
 
 // ======================================================

@@ -214,4 +214,15 @@ function showResults(score, percentage, message, correction) {
 // ======================================================
 // START APPLICATION
 // ======================================================
-renderQuestion();
+async function init() {
+  const response = await fetch("/api/questions/count");
+  if (!response.ok)
+    throw new Error("HTTP " + response.status);
+
+  const data = await response.json();
+  total = data.count;
+
+  await renderQuestion();
+}
+
+init();

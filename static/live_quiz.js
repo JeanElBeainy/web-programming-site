@@ -203,10 +203,8 @@ async function renderQuestion() {
 function showResults(score, percentage, message, correction) {
   document.getElementById("quizPanel").style.display = "none";
   document.getElementById("resultsPanel").style.display = "block";
-  document.getElementById("scoreText").textContent =
-``    `Score: ${score} / ${total}`;
-  document.getElementById("percentageText").textContent =
-    `Percentage: ${percentage}%`;
+  document.getElementById("scoreText").textContent = `Score: ${score} / ${total}`;
+  document.getElementById("percentageText").textContent = `Percentage: ${percentage}%`;
   document.getElementById("performanceText").textContent = message;
   document.getElementById("correction").textContent = correction;
 }

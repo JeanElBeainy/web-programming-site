@@ -12,7 +12,7 @@
 <p>Complete this form to provide information about your
 academic background, technical skills, internship
 experience, and Final Year Project preferences.</p>
-<form action="{{ url_for('submit_profile') }}" method="post">
+<form action="{{ url_for('profile_validated') }}" method="post" novalidate>
     <input type="hidden" name="form_version" value="2026-2027">
 
     <fieldset>

@@ -118,7 +118,7 @@ def submit_profile_review():
     return render_template("profile-form-week6.html")
 
 @app.route("/profile-validated", methods=["GET", "POST"])
-def profileValidated():
+def profile_validated():
     if request.method == "POST":
         errors, cleaned = validate_profile(request.form)
 
@@ -128,8 +128,8 @@ def profileValidated():
                 "profile-form-validated.html",
                 errors=errors,
                 data=request.form,
-                selSkills=request.form.getlist("skills"),
-                selSoftware=request.form.getlist("software"),
+                sel_skills=request.form.getlist("skills"),
+                sel_software=request.form.getlist("software"),
             )
 
         # all good -> show the profile
@@ -139,7 +139,7 @@ def profileValidated():
 
     # First visit (GET): empty form
     return render_template(
-        "profile-form-validated.html", errors={}, data={}, selSkills=[], selSoftware=[]
+        "profile-form-validated.html", errors={}, data={}, sel_skills=[], sel_software=[]
     )
 
 @app.route("/quiz", methods=["GET", "POST"])

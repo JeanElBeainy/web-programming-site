@@ -6,13 +6,13 @@ FULLNAME   = re.compile(r"^[A-Za-z][A-Za-z .'\-]{1,79}$")
              # letters/spaces/.'- , 2..80 chars
 # Use AI to generate the patterns for email, phone, github, url, month,
 # time, # and color. Ask it for explanation.
-# EMAIL      =
-# PHONE      =
-# GITHUB     =
-# HTTPS_URL  =
-# MONTH      =
-# TIME       =
-# HEXCOLOR   =
+EMAIL      = re.compile(r"^[a-z0-9._-]+@(net\.)?usek\.edu\.lb$")    # name@usek.edu.lb or name@net.usek.edu.lb
+PHONE      = re.compile(r"^\+961 ?\d{1,2} ?\d{6}$")                 # +961 70 123456 (spaces optional)
+GITHUB     = re.compile(r"^https://github\.com/[A-Za-z0-9-]+/?$")  # https://github.com/username
+HTTPS_URL  = re.compile(r"^https://\S+\.\S+$")                     # https:// then an address with a dot
+MONTH      = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")                 # YYYY-MM, month 01..12
+TIME       = re.compile(r"^([01]\d|2[0-3]):[0-5]\d$")               # HH:MM, 00:00..23:59
+HEXCOLOR   = re.compile(r"^#[0-9A-Fa-f]{6}$")                       # # then 6 hex digits
 
 # ---- allow-lists -------------------------------
 MAJORS     = {"computer", "electrical", "biomedical", "telecommunications"}

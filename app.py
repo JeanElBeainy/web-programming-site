@@ -37,6 +37,7 @@ Example inside profile.html (which extends your base.html):
 """
 
 from flask import Flask, render_template, request
+from validators import validate_profile
 
 app = Flask(__name__)
 
@@ -55,6 +56,7 @@ def home():
         {"week": 5, "title": "JavaScript app", "url": "/quiz"},
         {"week": 6, "title": "Form Validation (JavaScript)", "url": "/submit-profile-review"},
         {"week": 7, "title": "Live Quiz with Fetch", "url": "/live-quiz"},
+        {"week": 8, "title": "Live Quiz With Fetch", "url": "/profile-validated"},
     ]
     return render_template("index.html", weekly_work=weekly_work)
 
@@ -114,6 +116,31 @@ def submit_profile_review():
 
     # First visit (GET): just show the empty form.
     return render_template("profile-form-week6.html")
+
+@app.route("/profile-validated", methods=["GET", "POST"])
+def profileValidated():
+    if request.method == "POST":
+        errors, cleaned = validate_profile(request.form)
+
+        if errors:
+            # something's wrong -> re-show the FORM with errors + what was typed
+            return render_template(
+                "profile-form-validated.html",
+                errors=errors,
+                data=request.form,
+                selSkills=request.form.getlist("skills"),
+                selSoftware=request.form.getlist("software"),
+            )
+
+        # all good -> show the profile
+        return render_template(
+            "profile_validated.html", data=cleaned, skills=cleaned.get("skills", []), software=cleaned.get("software", [])
+        )
+
+    # First visit (GET): empty form
+    return render_template(
+        "profile-form-validated.html", errors={}, data={}, selSkills=[], selSoftware=[]
+    )
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():

@@ -1,5 +1,11 @@
 {% extends "base.html" %}
 
+{% macro err(f) %}
+  {% if errors.get(f) %}
+    <span class="error">{{ errors[f] }}</span>
+  {% endif %}
+{% endmacro %}
+
 {% block title %}Engineering Student Profile{% endblock %}
 
 {% block head %}

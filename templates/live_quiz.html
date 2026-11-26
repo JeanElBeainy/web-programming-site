@@ -1,12 +1,12 @@
-{% extends "base.html" %} {% block title %} Quiz {% endblock %} {% block head %}
+{% extends "base.html" %} {% block title %}Live JavaScript Quiz{% endblock %} {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='quiz.css') }}" />
 {% endblock %} {% block content%}
 <main class="container">
-  <h1>JavaScript Quiz</h1>
+  <h1>Live JavaScript Quiz</h1>
   <section id="quizPanel">
     <!-- The quiz's states. live_quiz.js shows the one that applies. -->
     <p id="loading">Loading…</p>
-    <p id="error" hidden></p>
+    <p id="error" class="error-box" hidden></p>
     <button id="retryBtn" hidden onclick="init()">Try again</button>
     <p id="empty" hidden>There are no questions yet. Please come back later.</p>
 

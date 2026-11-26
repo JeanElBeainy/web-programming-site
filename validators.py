@@ -20,7 +20,9 @@ GRADUATION = {"spring", "summer", "fall"}
 YESNO      = {"yes", "no"}
 
 # Do the same for other fields: skills, software, project areas ...
-# SKILLS     =
+SKILLS     = {"programming", "embedded-systems", "electronics", "computer-networks",
+              "telecommunications", "biomedical-instrumentation",
+              "artificial-intelligence", "signal-processing"}   # the checkbox values in the form
 # SOFTWARE   =
 # PROJECT_AREAS =
 
@@ -39,6 +41,14 @@ def parse_date(text):
 def to_number(text):
     try:
         return float(text)
+    except ValueError:
+        return None
+
+
+def to_int(text):
+    # Same idea as to_number, but only whole numbers: "2" -> 2, "2.5" -> None
+    try:
+        return int(text)
     except ValueError:
         return None
 

@@ -53,10 +53,10 @@ def home():
         {"week": 2, "title": "History of the Internet (AI)", "url": "/internet-history-ai"},
         {"week": 2, "title": "History of the Web (AI)", "url": "/web-history-ai"},
         {"week": 4, "title": "Engineering Student Profile", "url": "/submit-profile"},
-        {"week": 5, "title": "JavaScript app", "url": "/quiz"},
+        {"week": 5, "title": "JavaScript Quiz", "url": "/quiz"},
         {"week": 6, "title": "Form Validation (JavaScript)", "url": "/submit-profile-review"},
         {"week": 7, "title": "Live Quiz with Fetch", "url": "/live-quiz"},
-        {"week": 8, "title": "Live Quiz With Fetch", "url": "/profile-validated"},
+        {"week": 8, "title": "Server-side Form Validation", "url": "/profile-validated"},
     ]
     return render_template("index.html", weekly_work=weekly_work)
 
@@ -93,7 +93,7 @@ def submit_profile():
         skills = request.form.getlist("skills")         # checkboxes -> list
         software = request.form.getlist("software")     # multiple <select> -> list
         return render_template(
-            "profile.html", data=data, skills=skills, software=software
+            "profile_page.html", data=data, skills=skills, software=software
         )
 
     # First visit (GET): just show the empty form.
@@ -111,7 +111,7 @@ def submit_profile_review():
         skills = request.form.getlist("skills")         # checkboxes -> list
         software = request.form.getlist("software")     # multiple <select> -> list
         return render_template(
-            "profile.html", data=data, skills=skills, software=software
+            "profile_page.html", data=data, skills=skills, software=software
         )
 
     # First visit (GET): just show the empty form.
@@ -132,9 +132,14 @@ def profile_validated():
                 sel_software=request.form.getlist("software"),
             )
 
-        # all good -> show the profile
+        # all good -> show the profile (the SUCCESS state).
+        # Start from everything that was typed, then use the cleaned value
+        # wherever validators.py made one, so every field reaches the page.
+        data = request.form.to_dict()
+        data.update(cleaned)
+        # profile_page.html is profile.html wrapped in <main> (see that file).
         return render_template(
-            "profile_validated.html", data=cleaned, skills=cleaned.get("skills", []), software=cleaned.get("software", [])
+            "profile_page.html", data=data, skills=cleaned.get("skills", []), software=request.form.getlist("software")
         )
 
     # First visit (GET): empty form
@@ -145,6 +150,28 @@ def profile_validated():
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
     return render_template("quiz.html")
+
+
+# ---- Friendly error pages ---------------------------------------------
+# Instead of Flask's plain "Not Found" / "Internal Server Error" text, show
+# the error inside the site's own design, with a way back home.
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template(
+        "error.html",
+        title="Page not found",
+        message="Sorry, this page does not exist. It may have moved, or the link may be wrong.",
+    ), 404
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template(
+        "error.html",
+        title="Something went wrong",
+        message="Sorry, something went wrong on our side. Please try again in a moment.",
+    ), 500
 
 
 if __name__ == "__main__":

@@ -1,21 +1,31 @@
-{% extends "base.html" %} {% block title %} Quiz {% endblock %} {% block head %}
+{% extends "base.html" %} {% block title %}Live JavaScript Quiz{% endblock %} {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='quiz.css') }}" />
 {% endblock %} {% block content%}
-<main class="container">
-  <h1>JavaScript Quiz</h1>
+<main id="main" class="container">
+  <h1>Live JavaScript Quiz</h1>
   <section id="quizPanel">
-    <p id="loading" hidden>Loading…</p>
-    <p id="error" hidden></p>
-    <p id="progress"></p>
-    <h2 id="questionText"></h2>
-    <div id="choices"></div>
-    <div class="navigation">
-      <button id="firstBtn" onclick="goFirst()">First</button>
-      <button id="previousBtn" onclick="goPrevious()">Previous</button>
-      <button id="nextBtn" onclick="goNext()">Next</button>
-      <button id="lastBtn" onclick="goLast()">Last</button>
+    <!-- The quiz's states. live_quiz.js shows the one that applies.
+         role="alert": a screen reader reads the error out at once, the
+         moment it appears. role="status": the calm version, read out when
+         the screen reader finishes what it is saying. -->
+    <p id="loading" role="status">Loading…</p>
+    <p id="error" class="error-box" role="alert" hidden></p>
+    <button id="retryBtn" hidden onclick="init()">Try again</button>
+    <p id="empty" role="status" hidden>There are no questions yet. Please come back later.</p>
+
+    <!-- The quiz itself stays hidden until a question has loaded. -->
+    <div id="quizContent" hidden>
+      <p id="progress"></p>
+      <h2 id="questionText"></h2>
+      <div id="choices"></div>
+      <div class="navigation">
+        <button id="firstBtn" onclick="goFirst()">First</button>
+        <button id="previousBtn" onclick="goPrevious()">Previous</button>
+        <button id="nextBtn" onclick="goNext()">Next</button>
+        <button id="lastBtn" onclick="goLast()">Last</button>
+      </div>
+      <button id="submitBtn" class="submit" onclick="submitQuiz()">Submit Quiz</button>
     </div>
-    <button class="submit" onclick="submitQuiz()">Submit Quiz</button>
   </section>
   <section id="resultsPanel">
     <h2>Quiz Results</h2>

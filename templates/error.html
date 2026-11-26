@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{# Used by the 404 and 500 handlers in app.py. They pass in `title` and `message`. #}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+
+<main id="main">
+    <section>
+        <h2>{{ title }}</h2>
+        <p>{{ message }}</p>
+        <p><a href="{{ url_for('home') }}">Go back to the home page</a></p>
+    </section>
+</main>
+
+{% endblock %}

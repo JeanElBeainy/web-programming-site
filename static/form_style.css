@@ -1,77 +1,94 @@
 /* ==========================================================================
    Web Programming Portfolio — form_style.css
-   The profile form's own layer. Loaded by profile_form.html only, and loaded
-   AFTER style.css, so it does two jobs:
+   The profile forms' own layer. Loaded by the three profile form templates,
+   and loaded AFTER style.css, so it does two jobs:
 
      • extends the site — every control below is built out of the tokens in
        style.css's :root, so the form is the same paper and ink as the rest
        of the site and follows along if that palette changes.
-     • overrides it where a rule written for prose reads wrong in a form —
-       the 88px section padding, and a page-title-sized h1 that is really a
-       step label here.
+     • styles what the browser draws on its own — a <fieldset> comes with a
+       grey groove border and a plain <legend>, which look like nothing else
+       on the site.
 
    Deliberately absent: any re-declared :root variable, any font stack, any
-   hand-picked colour, any image.
+   hand-picked colour, any image. Buttons and error messages are styled in
+   style.css (sections 7 and 8), because the quiz uses them too.
 
-   MOBILE-FIRST, like the site stylesheet: every rule outside section 7 is
-   the phone layout, and each media query only ever adds room.
+   MOBILE-FIRST, like the site stylesheet: every rule outside section 6 is
+   the phone layout, and the media query only ever adds room.
 
-   Markup this targets — the field rows are written as
-   <p>Label: <input></p>, which is what the layout in section 2 exploits:
-     form > section > h1         numbered step label
-     form p                      one field row
-     form section > div          a radio / checkbox group
-     form p:has(textarea)        a field that needs the full width
+   Markup this targets:
+     form > fieldset > legend    a numbered step ("1. Personal Information")
+     form p                      one field row: <label>, control, error
+     fieldset fieldset           a question with options (Expected graduation)
+     fieldset ul > li            one option: radio/checkbox + its <label>
+     span.error                  the message under a field with a problem
    ========================================================================== */
 
 form {
   margin-block-start: var(--sp-2);
 }
 
+/* Following a link from the error summary scrolls to the field itself; the
+   extra margin keeps its label (just above it) on screen too. */
+form [id] {
+  scroll-margin-block-start: var(--sp-8);
+}
+
 /* ==========================================================================
-   1. Rhythm — the form's own spacing, and where it leaves the site's
+   1. Steps — the numbered <fieldset>s
    ========================================================================== */
 
-/* The site gives every <section> an 88px desktop block padding. That is
-   right for a page of prose and far too airy for five steps of a form, so
-   the numbered steps get step-sized spacing instead. Scoped to `form
-   section` so nothing here can reach a section on another page. */
-form section {
-  padding-block: var(--sp-4);
+/* Each step is a box drawn with the site's own hairline and radius, instead
+   of the browser's grey groove. min-width: 0 stops a fieldset from growing
+   wider than a phone screen (by default it is as wide as its widest field). */
+fieldset {
+  min-width: 0;
+  margin: 0 0 var(--sp-4);
+  padding: var(--sp-2);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
 }
 
-form > section:first-of-type {
-  padding-block-start: var(--sp-2);
-}
-
-/* The submit button is the last thing on the page; a rule under it would
-   close the form with a line that leads nowhere. */
-form > section:last-of-type {
-  padding-block-end: 0;
-  border-block-end: 0;
-}
-
-/* Numbered step labels. The site's h1 is a page title; inside a form the
-   same element is a section marker, so it drops to the small mono label
-   used by nav h2 and the table headers — same hierarchy, smaller voice. */
-form h1 {
-  margin: 0 0 var(--sp-3);
-  padding-block-end: var(--sp-1);
+/* The step name is a section marker, not a field, so it takes the small
+   mono label used by nav h2 and the table headers — the same hierarchy
+   as the rest of the site, in a smaller voice. */
+legend {
+  padding-inline: var(--sp-1);
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--muted);
-  border-block-end: var(--border-w) solid var(--border);
+}
+
+/* A fieldset inside a step is one question with options ("Expected
+   graduation"), not a step of its own: no second box, and its legend reads
+   like the other field labels. */
+fieldset fieldset {
+  margin: 0 0 var(--sp-3);
+  padding: 0;
+  border: 0;
+}
+
+fieldset fieldset legend {
+  margin-block-end: var(--sp-1);
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text);
 }
 
 /* ==========================================================================
-   2. Field rows — label and control on one line where there is room
-   Each field is one <p> holding a bare text label and then its control.
-   Making the <p> a flex row turns that text into an anonymous flex item,
-   so the label and the field lay out side by side without a single byte of
-   markup changing — and the field drops onto its own line, full width,
-   when the row runs out of room.
+   2. Field rows — label on top, field under it
+   Each field is one <p> holding its <label>, then its control, then its
+   error (if any). The <p> is a flex row; the control takes the full width,
+   so it drops under its label — the same shape on a phone and a computer,
+   which is the quickest form to scan from top to bottom.
    ========================================================================== */
 
 form p {
@@ -82,11 +99,14 @@ form p {
   margin-block-end: var(--sp-3);
 }
 
-/* A full-width field under its label. A 100% flex-basis puts every control
-   on a line of its own: a wide input is a bigger tap target on a phone, and
-   it keeps every row the same shape. A smaller basis would let short labels
-   keep their field alongside while longer ones dropped it below, so the form
-   would change shape partway down for no reason the reader can see. */
+/* Field labels are a step bolder than what is typed into the fields, so the
+   eye can tell the question from the answer. */
+form p > label {
+  font-weight: 500;
+}
+
+/* A full-width field under its label: a wide input is a bigger tap target
+   on a phone, and it keeps every row the same shape. */
 input:not([type="checkbox"], [type="radio"], [type="color"]),
 select,
 textarea {
@@ -113,6 +133,19 @@ textarea:hover {
   opacity: 1;   /* Firefox dims placeholders on top of the colour */
 }
 
+/* The error message always gets a line of its own, under the field. */
+form .error {
+  flex: 1 1 100%;
+}
+
+/* A field with a problem also gets a red border, so it can be spotted while
+   scrolling. (The red "Error: …" text under it says what is wrong.) */
+form p:has(.error) input:not([type="checkbox"], [type="radio"], [type="color"]),
+form p:has(.error) select,
+form p:has(.error) textarea {
+  border-color: var(--error);
+}
+
 /* ---- Fields that need the whole row ------------------------------------ */
 
 /* A multi-line field belongs under its label, not beside it. */
@@ -121,9 +154,16 @@ form p:has(select[multiple]) {
   display: block;
 }
 
+form p:has(textarea) > label,
+form p:has(select[multiple]) > label {
+  display: block;
+  margin-block-end: var(--sp-1);
+}
+
 textarea {
   display: block;
   width: 100%;
+  min-height: 7rem;
   line-height: var(--lh-body);
   resize: vertical;   /* horizontal resizing can only break the layout */
 }
@@ -161,36 +201,43 @@ optgroup {
 }
 
 /* ==========================================================================
-   4. Radio and checkbox groups
-   A group is a <div> holding the controls and their text runs, with no
-   element around each pair. That is not a problem for a grid: auto-placement
-   hands column 1 the control and column 2 its text, then starts a new row,
-   so the browser does the pairing for us.
-
-   Note the <p> above each group closes early — a <div> cannot live inside a
-   <p>, so the parser ends the paragraph before it. The div is therefore a
-   child of the <section>, which is why it is selected as such below.
+   4. Radio and checkbox options
+   Each option is <li><input> <label></li> inside a <ul>. The list loses its
+   bullets (the control is already the marker) and becomes a responsive grid,
+   like the weekly-work cards: as many columns as fit, one on a phone.
    ========================================================================== */
 
-form section > div {
+fieldset ul {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: baseline;
-  gap: var(--sp-1) var(--sp-2);
-  margin-block: var(--sp-1) var(--sp-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
+  gap: var(--sp-1) var(--sp-3);
+  margin: 0 0 var(--sp-1);
+  padding: 0;
+  list-style: none;
+}
+
+fieldset li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+  margin: 0;
+}
+
+/* The label is the click target too, so it gets the hand cursor. */
+fieldset li label {
+  cursor: pointer;
 }
 
 input[type="checkbox"],
 input[type="radio"] {
-  /* Not `flex: none` here — inside the group grid these are grid items, and
-     the rule that matters is that they never stretch to the cell. */
-  justify-self: start;
+  flex: none;
   width: 1.125rem;
   height: 1.125rem;
   margin: 0;
   /* The tick and the dot take the site green, so the controls are the same
      colour as every other signal on the page. */
   accent-color: var(--accent);
+  cursor: pointer;
 }
 
 /* The confirmation box is written as a sentence, so its text hangs under
@@ -227,47 +274,7 @@ input[type="color"]::-moz-color-swatch {
 }
 
 /* ==========================================================================
-   5. Buttons
-   ========================================================================== */
-
-button {
-  padding: 10px 18px;
-  font: inherit;
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text);
-  background: var(--bg);
-  border: var(--border-w) solid var(--border);
-  border-radius: var(--radius);
-  cursor: pointer;
-  transition: color var(--dur) var(--ease),
-              background-color var(--dur) var(--ease),
-              border-color var(--dur) var(--ease);
-}
-
-button:hover {
-  color: var(--accent);
-  background: var(--surface);
-  border-color: var(--accent);
-}
-
-/* Submitting is the one action that moves the form forward, so it carries
-   the accent fill. Reset stays a quiet outline beside it. */
-button[type="submit"] {
-  color: var(--on-accent);
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-button[type="submit"]:hover {
-  color: var(--on-accent);
-  background: var(--accent-strong);
-  border-color: var(--accent-strong);
-}
-
-/* ==========================================================================
-   6. Focus
+   5. Focus
    ========================================================================== */
 
 /* The site's focus ring, restated for the controls: the 2px outline becomes
@@ -284,104 +291,12 @@ textarea:focus-visible {
 }
 
 /* ==========================================================================
-   7. Responsive — widening the phone layout above
+   6. Responsive — widening the phone layout above
    ========================================================================== */
 
 @media (min-width: 40em) {
-  /* Past this width there is room to give every label a column of its own,
-     which is worth doing: with the phone layout each field starts wherever
-     its own label happens to end, so a column of fields comes out ragged by
-     up to ~60px — visible, and the thing that makes a form look unfinished.
-
-     So the section itself becomes the grid: labels in column 1, fields in
-     column 2. The <p> wrappers are dissolved with `display: contents` below,
-     which promotes the label text and its control out of the paragraph and
-     into this grid as siblings. Anonymous text runs become grid items just
-     like elements do, so the browser pairs them up for us. */
-  form section {
-    display: grid;
-    /* A fixed label column, not max-content. max-content would size the
-       column per section, so section 1's short labels would sit its fields
-       ~250px further left than the sections below it and the field column
-       would jog sideways as you scrolled. One width for every section
-       instead: labels line up with each other from the top of the form to
-       the bottom. The three labels longer than 17rem wrap to a second line. */
-    grid-template-columns: 17rem minmax(0, 1fr);
-    column-gap: var(--sp-3);
-    row-gap: var(--sp-3);
-    align-items: center;
-    padding-block: var(--sp-5);
-  }
-
-  /* Spread across both columns: the step label, the option groups, and every
-     field row that needs the full width. */
-  form section > h1,
-  form section > div {
-    grid-column: 1 / -1;
-  }
-
-  /* Rows that dissolve into the grid. Each of the rules after this one
-     restates the display its row had before, because this would otherwise
-     take it away. */
-  form section > p {
-    display: contents;
-  }
-
-  form section > p:has(textarea),
-  form section > p:has(select[multiple]) {
-    display: block;
-    grid-column: 1 / -1;
-  }
-
-  form section > p:has(button) {
-    display: flex;
-    grid-column: 1 / -1;
-  }
-
-  /* The confirmation box keeps its own grid, so its text still hangs under
-     itself rather than under the box. */
-  form section > p:has(> input[type="checkbox"]) {
-    display: grid;
-    grid-column: 1 / -1;
-  }
-
-  /* The grid's row-gap owns the vertical rhythm in here. Leaving the base
-     margins in place would double every gap. */
-  form section > h1,
-  form section > div,
-  form section > p:has(textarea),
-  form section > p:has(select[multiple]),
-  form section > p:has(button),
-  form section > p:has(> input[type="checkbox"]) {
-    margin-block: 0;
-  }
-
-  /* Two option pairs per row once there is width for them — the checklist
-     reads as a grid instead of one long ladder. */
-  form section > div {
-    grid-template-columns: auto minmax(0, 1fr) auto minmax(0, 1fr);
-  }
-
-  textarea {
-    min-height: 7rem;
+  /* More room inside each step once the screen can spare it. */
+  fieldset {
+    padding: var(--sp-3);
   }
 }
-
-/* ==========================================================================
-   OPTIONAL — nothing below applies until you change the markup yourself.
-   ========================================================================== */
-
-/* The group options and their text are written as sibling nodes:
-     <input type="radio" name="graduation" value="spring"> Spring
-   The layout above pairs them with a grid, but the text is still not a real
-   label: clicking it does nothing, and a screen reader reads it as loose
-   text beside the control. Wrapping each pair fixes both:
-     <label><input type="radio" name="graduation" value="spring"> Spring</label>
-   Then this rule takes over from the grid pairing:
-
-     form section > div { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-4); }
-     form section > div label { display: flex; align-items: center; gap: var(--sp-1); cursor: pointer; }
-
-   Two smaller cleanups in the same pass: </input> is not a closing tag for
-   anything (input is a void element, so it is dropped and ignored), and a
-   <div> cannot sit inside a <p>. */

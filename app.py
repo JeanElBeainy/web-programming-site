@@ -132,9 +132,13 @@ def profile_validated():
                 sel_software=request.form.getlist("software"),
             )
 
-        # all good -> show the profile
+        # all good -> show the profile (the SUCCESS state).
+        # Start from everything that was typed, then use the cleaned value
+        # wherever validators.py made one, so every field reaches the page.
+        data = request.form.to_dict()
+        data.update(cleaned)
         return render_template(
-            "profile_validated.html", data=cleaned, skills=cleaned.get("skills", []), software=cleaned.get("software", [])
+            "profile.html", data=data, skills=cleaned.get("skills", []), software=request.form.getlist("software")
         )
 
     # First visit (GET): empty form
@@ -145,6 +149,28 @@ def profile_validated():
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
     return render_template("quiz.html")
+
+
+# ---- Friendly error pages ---------------------------------------------
+# Instead of Flask's plain "Not Found" / "Internal Server Error" text, show
+# the error inside the site's own design, with a way back home.
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return render_template(
+        "error.html",
+        title="Page not found",
+        message="Sorry, this page does not exist. It may have moved, or the link may be wrong.",
+    ), 404
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return render_template(
+        "error.html",
+        title="Something went wrong",
+        message="Sorry, something went wrong on our side. Please try again in a moment.",
+    ), 500
 
 
 if __name__ == "__main__":

@@ -21,6 +21,7 @@
      label.choice             one answer: a radio plus its text
      .navigation              the four move-around buttons
      .submit                  the accent-filled submit button
+     #loading, #error, #empty the waiting, failed and no-questions messages
      #resultsPanel            hidden until the quiz is submitted
    ========================================================================== */
 
@@ -135,7 +136,28 @@ button:disabled {
 }
 
 /* ==========================================================================
-   3. Results
+   3. Loading, error and empty states
+   ========================================================================== */
+
+/* "Loading…" and "There are no questions yet" are quiet notes. */
+#loading,
+#empty {
+  color: var(--muted);
+}
+
+/* The error must not be missed, so it gets a red panel with a thick left
+   border: the border and the "Sorry, …" wording carry the message too, so
+   colour is not the only signal. */
+#error {
+  padding: var(--sp-2);
+  color: var(--error);
+  background: var(--error-bg);
+  border-inline-start: 4px solid var(--error);
+  border-radius: var(--radius);
+}
+
+/* ==========================================================================
+   4. Results
    ========================================================================== */
 
 /* Hidden at first; the script reveals it when the quiz is submitted. */

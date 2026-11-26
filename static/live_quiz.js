@@ -142,22 +142,56 @@ async function buildCorrection() {
 // ======================================================
 
 // ======================================================
+// ERROR MESSAGES
+// ======================================================
+// Shows a friendly message to the user. The Try again button only appears
+// when trying again makes sense (canRetry is true).
+function showError(message, canRetry) {
+  const error = document.getElementById("error");
+  error.textContent = message;
+  error.hidden = false;
+  document.getElementById("retryBtn").hidden = !canRetry;
+}
+
+function hideError() {
+  document.getElementById("error").hidden = true;
+  document.getElementById("retryBtn").hidden = true;
+}
+
+// ======================================================
 // SUBMIT QUIZ
 // ======================================================
 async function submitQuiz() {
-  const score = await calculateScore();
-  const percentage = calculatePercentage(score);
-  const message = getPerformanceMessage(percentage);
-  const correction = await buildCorrection();
-  showResults(score, percentage, message, correction);
+  const submitBtn = document.getElementById("submitBtn");
+
+  // LOADING: scoring may have to fetch questions that were skipped,
+  // so the button says it is busy and can't be clicked twice.
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Checking your answers…";
+  hideError();
+
+  try {
+    const score = await calculateScore();
+    const percentage = calculatePercentage(score);
+    const message = getPerformanceMessage(percentage);
+    const correction = await buildCorrection();
+    showResults(score, percentage, message, correction); // SUCCESS
+  } catch (err) {
+    console.error(err); // the technical details, for the developer
+    // ERROR: the answers are kept, so the user can just submit again.
+    showError("Sorry, your answers could not be checked. Please click Submit Quiz again.", false);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Quiz";
+  }
 }
 
 async function renderQuestion() {
   const loading = document.getElementById("loading");
-  const error = document.getElementById("error");
+  const quizContent = document.getElementById("quizContent");
 
   loading.hidden = false;
-  error.hidden = true;
+  hideError();
 
   try {
     const q = await getQuestion(currentQuestion);
@@ -189,9 +223,14 @@ async function renderQuestion() {
     document.getElementById("previousBtn").disabled = currentQuestion === 0;
     document.getElementById("nextBtn").disabled = currentQuestion === total - 1;
     document.getElementById("lastBtn").disabled = currentQuestion === total - 1;
+
+    quizContent.hidden = false; // SUCCESS: show the question
   } catch (err) {
-    error.textContent = "Could not load the question: " + err.message;
-    error.hidden = false;
+    console.error(err);
+    // ERROR: hide the question, because the page would still show the
+    // previous one while the answers would be saved to the new one.
+    quizContent.hidden = true;
+    showError("Sorry, this question could not be loaded. Check your connection and try again.", true);
   } finally {
     loading.hidden = true;
   }
@@ -212,13 +251,33 @@ function showResults(score, percentage, message, correction) {
 // ======================================================
 // START APPLICATION
 // ======================================================
+// Also called by the Try again button. Your answers so far are kept.
 async function init() {
-  const response = await fetch("/api/questions/count");
-  if (!response.ok)
-    throw new Error("HTTP " + response.status);
+  const loading = document.getElementById("loading");
 
-  const data = await response.json();
-  total = data.count;
+  loading.hidden = false; // LOADING
+  hideError();
+
+  try {
+    const response = await fetch("/api/questions/count");
+    if (!response.ok)
+      throw new Error("HTTP " + response.status);
+
+    const data = await response.json();
+    total = data.count;
+  } catch (err) {
+    console.error(err);
+    loading.hidden = true;
+    showError("Sorry, the quiz could not be loaded. Check your connection and try again.", true); // ERROR
+    return;
+  }
+
+  // EMPTY: the request worked, but there are no questions in the database.
+  if (total === 0) {
+    loading.hidden = true;
+    document.getElementById("empty").hidden = false;
+    return;
+  }
 
   await renderQuestion();
 }

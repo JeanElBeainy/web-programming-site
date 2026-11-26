@@ -53,10 +53,10 @@ def home():
         {"week": 2, "title": "History of the Internet (AI)", "url": "/internet-history-ai"},
         {"week": 2, "title": "History of the Web (AI)", "url": "/web-history-ai"},
         {"week": 4, "title": "Engineering Student Profile", "url": "/submit-profile"},
-        {"week": 5, "title": "JavaScript app", "url": "/quiz"},
+        {"week": 5, "title": "JavaScript Quiz", "url": "/quiz"},
         {"week": 6, "title": "Form Validation (JavaScript)", "url": "/submit-profile-review"},
         {"week": 7, "title": "Live Quiz with Fetch", "url": "/live-quiz"},
-        {"week": 8, "title": "Live Quiz With Fetch", "url": "/profile-validated"},
+        {"week": 8, "title": "Server-side Form Validation", "url": "/profile-validated"},
     ]
     return render_template("index.html", weekly_work=weekly_work)
 

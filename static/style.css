@@ -28,6 +28,8 @@
   --accent:        #0E7A44;  /* links, markers, focus ring — 5.4:1    */
   --accent-strong: #0B5F35;  /* accent, one step darker, for hovers   */
   --on-accent:     #FFFFFF;  /* text on top of --accent — 5.4:1       */
+  --error:         #B42318;  /* error text — 6.0:1 on --error-bg      */
+  --error-bg:      #FEF3F2;  /* behind an error message               */
 
   /* ---- Type ----------------------------------------------------------- */
   /* Mono for headings, nav, labels and code; sans for body prose.

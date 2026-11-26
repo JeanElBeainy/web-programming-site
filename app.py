@@ -93,7 +93,7 @@ def submit_profile():
         skills = request.form.getlist("skills")         # checkboxes -> list
         software = request.form.getlist("software")     # multiple <select> -> list
         return render_template(
-            "profile.html", data=data, skills=skills, software=software
+            "profile_page.html", data=data, skills=skills, software=software
         )
 
     # First visit (GET): just show the empty form.
@@ -111,7 +111,7 @@ def submit_profile_review():
         skills = request.form.getlist("skills")         # checkboxes -> list
         software = request.form.getlist("software")     # multiple <select> -> list
         return render_template(
-            "profile.html", data=data, skills=skills, software=software
+            "profile_page.html", data=data, skills=skills, software=software
         )
 
     # First visit (GET): just show the empty form.
@@ -137,8 +137,9 @@ def profile_validated():
         # wherever validators.py made one, so every field reaches the page.
         data = request.form.to_dict()
         data.update(cleaned)
+        # profile_page.html is profile.html wrapped in <main> (see that file).
         return render_template(
-            "profile.html", data=data, skills=cleaned.get("skills", []), software=request.form.getlist("software")
+            "profile_page.html", data=data, skills=cleaned.get("skills", []), software=request.form.getlist("software")
         )
 
     # First visit (GET): empty form

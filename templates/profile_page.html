@@ -1,0 +1,11 @@
+{% extends "profile.html" %}
+{# profile.html is the instructor's file ("do not edit"), and its content is
+   not inside a <main>. So this small file shows the same profile, wrapped in
+   <main id="main">: screen-reader users can jump straight to it, and the skip
+   link has somewhere to go. super() means "everything profile.html puts in
+   this block". app.py renders this file instead of profile.html. #}
+{% block content %}
+<main id="main">
+{{ super() }}
+</main>
+{% endblock %}

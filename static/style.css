@@ -689,6 +689,31 @@ button:disabled {
   border-radius: var(--radius);
 }
 
+/* Skip link (base.html). Parked off the left edge of the screen, not
+   display:none, because a display:none link can't be reached with Tab
+   either. When it gets keyboard focus it slides into the top-left corner. */
+.skip-link {
+  position: absolute;
+  top: var(--sp-1);
+  left: -999px;
+  z-index: 10;
+  padding: var(--sp-1) var(--sp-2);
+  font-weight: 600;
+  color: var(--on-accent);
+  background: var(--accent);
+  border-radius: var(--radius);
+}
+
+.skip-link:focus {
+  left: var(--sp-1);
+}
+
+/* Keep the text white on hover too (the general a:hover would turn it
+   dark green, on a green background). */
+.skip-link:hover {
+  color: var(--on-accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

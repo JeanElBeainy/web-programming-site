@@ -20,3 +20,15 @@ window.addEventListener("pageshow", function () {
   submitBtn.disabled = false;
   submitBtn.textContent = "Submit Profile";
 });
+
+// ======================================================
+// ERROR SUMMARY — ANNOUNCE IT
+// ======================================================
+// The summary arrives with the reloaded page instead of appearing later, and
+// a screen reader does not always read out a role="alert" that was there from
+// the start. Moving the focus onto it makes sure it is read, and the next Tab
+// goes straight to the first problem's link.
+const errorSummary = document.getElementById("error-summary");
+if (errorSummary) {
+  errorSummary.focus();
+}

@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-<main>
+<main id="main">
 <h2>Engineering Student Profile</h2>
 <p>Complete this form to provide information about your
 academic background, technical skills, internship
@@ -23,7 +23,9 @@ experience, and Final Year Project preferences.</p>
 
 {# ERROR SUMMARY: after a failed submit the page reloads at the top, and the
    problems can be far down the form. So list them all here first, in form
-   order, each one a link that jumps to its field. #}
+   order, each one a link that jumps to its field.
+   role="alert" tells a screen reader to read it out, and tabindex="-1" lets
+   form_submit.js move the keyboard focus onto it when the page loads. #}
 {% if errors %}
 {% set field_labels = {
     "student_id": "Student ID",
@@ -51,7 +53,7 @@ experience, and Final Year Project preferences.</p>
     "meeting_time": "Preferred Meeting Time",
     "confirmation": "Confirmation",
 } %}
-<div class="error-box">
+<div class="error-box" id="error-summary" role="alert" tabindex="-1">
     <p><strong>Error: please fix {{ errors|length }} {{ "field" if errors|length == 1 else "fields" }}, then submit again.</strong></p>
     <ul>
         {% for field, label in field_labels.items() if errors.get(field) %}

@@ -2,7 +2,7 @@
 {% block title %} Home {% endblock %}
 {% block content%}
 
-<main>
+<main id="main">
     <section>
         <img
             src="{{ url_for('static', filename='images/campus-800.jpg') }}"
@@ -10,8 +10,8 @@
                     {{ url_for('static', filename='images/campus-800.jpg') }} 800w,
                     {{ url_for('static', filename='images/campus-1200.jpg') }} 1200w"
             sizes="(max-width: 720px) 100vw, 720px"
-            width="1200" height="800"
-            alt="Describe what the photo shows">
+            width="1200" height="455"
+            alt="Students walking along a garden path with red flowers and palm trees, toward a sandstone university building">
     </section>
     <section>
         <h2>Weekly Work</h2>

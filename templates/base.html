@@ -8,6 +8,12 @@
     <title>{% block title %}My Web Programming Portfolio{% endblock %}</title>
 </head>
 <body>
+    {# SKIP LINK: the very first thing the Tab key reaches. Hidden until it
+       gets focus (see style.css, section 9), it lets keyboard users jump past
+       the logo and the 7 nav links straight to <main id="main">. It sits
+       outside the header block so the history pages get it too. #}
+    <a class="skip-link" href="#main">Skip to main content</a>
+
     {% block header %}
     <header>
         <div class="brand">

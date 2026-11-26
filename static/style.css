@@ -4,7 +4,7 @@
    nothing decorative, everything legible.
 
    MOBILE-FIRST. Every rule outside a media query is the phone layout.
-   From there, @media (min-width: …) queries in section 8 add room as the
+   From there, @media (min-width: …) queries in section 10 add room as the
    screen grows. Never write a desktop value as a default and undo it for
    phones — a 375px screen should never have to un-inherit anything.
 
@@ -409,6 +409,16 @@ nav a:hover {
   text-underline-offset: 4px;
 }
 
+/* "You are here": the link to the page you are on (base.html adds
+   aria-current="page" to it). Dark, bold and underlined, so it is not
+   shown by colour alone. */
+nav a[aria-current="page"] {
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
 nav h2 {
   margin: 0 0 var(--sp-1);
   font-size: 0.75rem;
@@ -573,7 +583,104 @@ tbody tr:hover {
 }
 
 /* ==========================================================================
-   7. Focus and motion — not width-dependent, so no media query
+   7. Buttons — one set of rules for every button on the site
+   (These used to be written twice, in quiz.css and form_style.css.)
+   A button changes look for each thing that can happen to it, so the user
+   always knows it "heard" them: :hover, :active, :focus-visible (section 9)
+   and :disabled.
+   ========================================================================== */
+
+button {
+  padding: 10px 18px;
+  font: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--bg);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: color var(--dur) var(--ease),
+              background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease);
+}
+
+/* :hover — the mouse is over it. */
+button:hover:not(:disabled) {
+  color: var(--accent);
+  background: var(--surface);
+  border-color: var(--accent);
+}
+
+/* The main action of a page (Submit) is filled with the accent colour,
+   so it stands out from the other buttons. */
+button[type="submit"],
+.submit {
+  color: var(--on-accent);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+button[type="submit"]:hover:not(:disabled),
+.submit:hover:not(:disabled) {
+  color: var(--on-accent);
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
+
+/* :active — it is being pressed right now, so it sinks by 1px. */
+button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* :disabled — it can't be clicked: grey, with a "not allowed" cursor.
+   Last, so it also wins over the green Submit style. */
+button:disabled {
+  color: var(--muted);
+  background: var(--surface);
+  border-color: var(--border);
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   8. Error messages — used by the profile form and the live quiz
+   ========================================================================== */
+
+/* One message next to its field. The word "Error:" is written in the HTML,
+   so the colour is never the only signal. */
+.error {
+  display: block;
+  color: var(--error);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+/* A red panel for a message that must not be missed: the form's list of
+   problems and the quiz's "could not be loaded" message. */
+.error-box {
+  margin-block-end: var(--sp-3);
+  padding: var(--sp-2);
+  color: var(--error);
+  background: var(--error-bg);
+  border-inline-start: 4px solid var(--error);
+  border-radius: var(--radius);
+}
+
+.error-box ul {
+  margin-block: var(--sp-1) 0;
+}
+
+.error-box li::marker {
+  color: var(--error);
+}
+
+.error-box a {
+  color: var(--error);
+}
+
+/* ==========================================================================
+   9. Focus and motion — not width-dependent, so no media query
    ========================================================================== */
 
 :focus-visible {
@@ -596,7 +703,7 @@ tbody tr:hover {
 }
 
 /* ==========================================================================
-   8. Responsive — widening the phone layout above
+   10. Responsive — widening the phone layout above
    Each query only ever ADDS room. Nothing here is a correction to the
    defaults, which is what keeps the phone layout honest.
 

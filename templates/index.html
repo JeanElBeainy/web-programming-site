@@ -4,6 +4,16 @@
 
 <main>
     <section>
+        <img
+            src="{{ url_for('static', filename='images/campus-800.jpg') }}"
+            srcset="{{ url_for('static', filename='images/campus-400.jpg') }} 400w,
+                    {{ url_for('static', filename='images/campus-800.jpg') }} 800w,
+                    {{ url_for('static', filename='images/campus-1200.jpg') }} 1200w"
+            sizes="(max-width: 720px) 100vw, 720px"
+            width="1200" height="800"
+            alt="Describe what the photo shows">
+    </section>
+    <section>
         <h2>Weekly Work</h2>
         <!-- Each week you add a link here to that week's page or feature. -->
         <ul class="weekly-list">
